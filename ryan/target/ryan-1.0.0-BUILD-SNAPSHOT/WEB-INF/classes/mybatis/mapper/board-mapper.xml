@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="baordMapper">
+	<resultMap type="boardVO" id="BoardVOResult">
+		<id property="no" column="no"/>
+		<result property="subject" column="subject"/>
+		<result property="contents" column="contents"/>
+	</resultMap>
+	
+	<select id="getBoardListCount" resultType="int">
+		select count(*) from board
+	</select>
+	
+	<select id="getBoardList" parameterType="Map" resultMap="BoardVOResult">
+		<![CDATA[
+			SELECT * 
+			FROM board
+		]]>			
+	</select>
+</mapper>

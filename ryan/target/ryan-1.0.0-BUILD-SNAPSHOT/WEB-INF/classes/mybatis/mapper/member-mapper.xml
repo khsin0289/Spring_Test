@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberMapper">
+	<resultMap type="memberVO" id="MemberVOResult">
+		<id property="seq" column="seq"/>
+		<result property="main_image" column="main_image"/>
+		<result property="main_title" column="main_title"/>
+		<result property="main_text" column="main_text"/>
+	</resultMap>
+	
+	<select id="getMemberListCount" resultType="int">
+		select count(*) from ryan
+	</select>
+	
+	<select id="getMemberList" parameterType="Map" resultMap="MemberVOResult">
+		<![CDATA[
+			SELECT * 
+			FROM ryan
+		]]>			
+	</select>
+</mapper>
