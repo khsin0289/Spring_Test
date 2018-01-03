@@ -6,6 +6,11 @@
 	<context:component-scan base-package="ryan.board.dao.**"/>
 	<context:component-scan base-package="ryan.member.service.**"/>
 	<context:component-scan base-package="ryan.member.dao.**"/>
+	<context:component-scan base-package="ryan.myapge.service.**"/>
+	<context:component-scan base-package="ryan.mypage.dao.**"/>
+	
+<!-- 	<context:component-scan base-package="ryan.**.service.**"/>
+	<context:component-scan base-package="ryan.**.dao.**"/> -->
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -19,7 +24,9 @@
 		<property name="configLocation" value="classpath:mybatis/config/mybatis-config.xml"/>
 		<property name="mapperLocations" value="classpath:mybatis/mapper/**-mapper.xml"/>
 	</bean>
+	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"/>
 	</bean>
+	
 </beans>

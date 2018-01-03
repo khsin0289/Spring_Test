@@ -6,9 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Board List</title>
+
+<style type="text/css">
+	#BoardTable{border: 1px solid black;}
+</style>
 </head>
 <body>
+<h1>BOARD</h1>
 	<table id="BoardTable">
 	<c:forEach items="${boardList}" var="boardList" varStatus="status">
 		<tr>
@@ -18,5 +24,6 @@
 		</tr>
 	</c:forEach>
 </table>
+<a href="/ryan/index.jsp">메인으로</a>
 </body>
 </html>
