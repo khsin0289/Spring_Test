@@ -31,4 +31,8 @@ public class BoardDAO {
 		map.put("endRow", endRow);		
 		return sqlSession.selectList("boardMapper.getBoardList", map);
 	}
+
+	public int boardWirte(BoardVO boardVO) {
+		return sqlSession.insert("boardMapper.boardWrite", boardVO);
+	}
 }

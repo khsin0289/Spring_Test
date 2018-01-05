@@ -9,6 +9,7 @@ import ryan.board.vo.BoardVO;
 
 @Service("BoardService")
 public class BoardServiceImpl implements BoardService{
+	
 	@Resource(name="BoardDAO")
 	private BoardDAO boardDao;
 
@@ -21,4 +22,12 @@ public class BoardServiceImpl implements BoardService{
 	public List<BoardVO> getBoardList(int currentPage, int limit) {
 		return boardDao.getBoardList(currentPage, limit);
 	}
+	
+	//boardWrite
+	@Override
+	public int boardWrite(BoardVO BoardVO) {
+		return boardDao.boardWirte(BoardVO);
+	}
+	
+	
 }

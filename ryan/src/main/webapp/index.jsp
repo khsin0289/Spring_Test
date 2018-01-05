@@ -14,7 +14,6 @@
 		<li><a href="member/memberList.do">멤버 게시판</a></li>
 		<li><a href="mypage/mypageList.do">마이페이지</a></li>
 		<li><a href="googleMap.jsp">지도 보기</a></li>
-		<li></li>
 	</ul>
 	
 </body>

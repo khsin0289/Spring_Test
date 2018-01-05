@@ -8,6 +8,11 @@ import ryan.board.vo.BoardVO;
 
 @Service
 public interface BoardService {
-		int getBoardListCount();
-		List<BoardVO> getBoardList(int currentPage, int limit);	
+	// boardList
+	int getBoardListCount();
+	List<BoardVO> getBoardList(int currentPage, int limit);
+	
+	// boardWrite
+	int boardWrite(BoardVO boardVO);
+	
 }

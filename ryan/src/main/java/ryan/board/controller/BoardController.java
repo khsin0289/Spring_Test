@@ -15,6 +15,7 @@ public class BoardController {
 	@Resource(name="BoardService")
 	private BoardService boardService;
 	
+	// boardList
 	@RequestMapping(value="/boardList.do")
 	public ModelAndView boardListView(ModelAndView mav, HttpServletRequest request){
 		
@@ -64,4 +65,25 @@ public class BoardController {
 		mav.setViewName("board/boardList");
 		return mav;
 	}
+	
+	// board insert  start ################################################
+	// boardWrite View
+	@RequestMapping(value="/boardWriteView.do")
+	public String boardWriteView(){
+		return "board/boardWriteView";
+	}
+	
+	// boardWrite DB insert
+	@RequestMapping(value="/boardWrite.do")
+	public ModelAndView boardWrite(ModelAndView mav, BoardVO boardVO){
+		
+		boardService.boardWrite(boardVO);
+		mav.setViewName("redirect:/board/boardList.do");
+		return mav;
+	}
+	// board insert end#################################################
+	
+	
+	
+	
 }
