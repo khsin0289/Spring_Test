@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mypageMapper">
+	<resultMap type="mypageVO" id="MypageVOResult">
+		<id property="no" column="no"/>
+		<result property="id" column="id"/>
+		<result property="password" column="password"/>
+		<result property="name" column="name"/>
+	</resultMap>
+	
+	<select id="getMypageListCount" resultType="int">
+		select count(*) from mypage
+	</select>
+	
+	<select id="getMypageList" parameterType="Map" resultMap="MypageVOResult">
+		<![CDATA[
+			SELECT * 
+			FROM mypage
+		]]>			
+	</select>
+</mapper>
