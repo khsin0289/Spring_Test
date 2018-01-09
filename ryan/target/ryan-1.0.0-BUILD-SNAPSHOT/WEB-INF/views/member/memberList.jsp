@@ -4,22 +4,28 @@
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-<title>MemberList</title>
+<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href='https://fonts.googleapis.com/css?family=RobotoDraft' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
 
+<style type="text/css">
+	#myTable{border: 1px solid black;}
+</style>
+
+<title>MemberList</title>
+</head>
+
+<body>
+<h1>MEMBER</h1>
 <table id="myTable">
-	<c:forEach items="${boardList}" var="boardList" varStatus="status">
+	<c:forEach items="${memberList}" var="memberList" varStatus="status">
 		<tr>
-			<td scope="col" style="width:25%">${boardList.id}</td>
-			<td scope="col" style="width:25%">${boardList.name}</td>
-			<td scope="col" style="width:25%">${boardList.phone}</td>
+			<td scope="col" style="width:25%">${memberList.id}</td>
+			<td scope="col" style="width:25%">${memberList.name}</td>
+			<td scope="col" style="width:25%">${memberList.phone}</td>
 		</tr>
 	</c:forEach>
 </table>
+<a href="/ryan/index.jsp">메인으로</a>
 
 <!-- paging -->
 <div class="paging" style="text-align: center;">

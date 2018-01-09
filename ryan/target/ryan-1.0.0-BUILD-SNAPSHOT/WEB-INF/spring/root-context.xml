@@ -2,14 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<context:component-scan base-package="ryan.**.service"/>
-	<context:component-scan base-package="ryan.**.dao"/>
+	<context:component-scan base-package="ryan.**.service.**"/>
+	<context:component-scan base-package="ryan.**.dao.**"/>
+
+	
+<!-- 	<context:component-scan base-package="ryan.**.service.**"/>
+	<context:component-scan base-package="ryan.**.dao.**"/> -->
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://175.207.12.248:3306/wordpress"/>
-		<property name="username" value="wordpress"/>
-		<property name="password" value="core2022"/>
+		<property name="url" value="jdbc:mysql://175.207.12.252:3306/test"/>
+		<property name="username" value="shop_db_admin"/>
+		<property name="password" value="1234f"/>
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -17,7 +21,9 @@
 		<property name="configLocation" value="classpath:mybatis/config/mybatis-config.xml"/>
 		<property name="mapperLocations" value="classpath:mybatis/mapper/**-mapper.xml"/>
 	</bean>
+	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"/>
 	</bean>
+	
 </beans>

@@ -3,7 +3,7 @@
 
 <mapper namespace="boardMapper">
 
-	<!-- <typeAlias alias="boadVO" type="/ryan/board/vo/boardVO" ></typeAlias> -->
+	<!-- <typeAlias type="/ryan/board/vo/boardVO" alias="boadVO"/> -->
 	
 	<resultMap type="boardVO" id="BoardVOResult">
 		<id property="no" column="no"/>
@@ -15,7 +15,7 @@
 		select count(*) from board
 	</select>
 	
-	<!-- boardList select-->
+	<!-- boardList select -->
 	<select id="getBoardList" parameterType="Map" resultMap="BoardVOResult">
 		<![CDATA[
 			SELECT * 
@@ -23,15 +23,23 @@
 		]]>			
 	</select>
 	
-	
-	
-	<!-- boardWrite insert-->
+	<!-- boardWrite insert -->
 	<insert id="boardWrite" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="no">
-		insert into test.board (subject, contents) values (#{subject}, #{contents})
+		insert into board (subject, contents) values (#{subject}, #{contents})
 			<!-- <selectKey keyProperty="no" resultType="Integer" order="AFTER">
 				select IDENT_CURRENT("board")
 			</selectKey> -->
 	</insert>
+	
+	<!-- selectOne boardDetailView게시물 상세보기 -->
+	<select id="boardSelectOne" parameterType="int" resultMap="BoardVOResult">
+		select * form board where no = #{no}
+	</select>
+	
+	<!-- boardDelete -->
+	<delete id="boardDelete" parameterType="int">
+		delete from board where no = #{no} 
+	</delete>
 	
 	
 	

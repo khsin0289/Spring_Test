@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="baordMapper">
+
+<mapper namespace="boardMapper">
+
+	<!-- <typeAlias type="/ryan/board/vo/boardVO" alias="boadVO"/> -->
+	
 	<resultMap type="boardVO" id="BoardVOResult">
 		<id property="no" column="no"/>
 		<result property="subject" column="subject"/>
@@ -11,10 +15,34 @@
 		select count(*) from board
 	</select>
 	
+	<!-- boardList select -->
 	<select id="getBoardList" parameterType="Map" resultMap="BoardVOResult">
 		<![CDATA[
 			SELECT * 
 			FROM board
 		]]>			
 	</select>
+	
+	<!-- boardWrite insert -->
+	<insert id="boardWrite" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="no">
+		insert into board (subject, contents) values (#{subject}, #{contents})
+			<!-- <selectKey keyProperty="no" resultType="Integer" order="AFTER">
+				select IDENT_CURRENT("board")
+			</selectKey> -->
+	</insert>
+	
+	<!-- selectOne boardDetailView게시물 상세보기 -->
+	<select id="boardSelectOne" parameterType="int" resultMap="BoardVOResult">
+		select * form board where no = #{no}
+	</select>
+	
+	<!-- boardDelete -->
+	<delete id="boardDelete" parameterType="int">
+		delete from board where no = #{no} 
+	</delete>
+	
+	
+	
+	
+	
 </mapper>

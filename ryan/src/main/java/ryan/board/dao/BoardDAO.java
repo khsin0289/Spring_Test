@@ -32,7 +32,18 @@ public class BoardDAO {
 		return sqlSession.selectList("boardMapper.getBoardList", map);
 	}
 
+	//게시물 등록하기
 	public int boardWirte(BoardVO boardVO) {
 		return sqlSession.insert("boardMapper.boardWrite", boardVO);
+	}
+	
+	// 게시물 상세보기
+	public BoardVO boardDetailView(int no) {
+		return (BoardVO) sqlSession.selectOne("boardMapper.boardSelectOne", no);
+	}
+
+	//게시물 삭제
+	public int boardDelete(int board_no) {
+		return sqlSession.delete("boardMapper.boardDelete", board_no);
 	}
 }
