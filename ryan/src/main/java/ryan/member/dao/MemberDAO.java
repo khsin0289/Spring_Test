@@ -14,7 +14,7 @@ import ryan.member.vo.MemberVO;
 public class MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	//private static final String NAMESPACE = "memberMapper.";
+	private static final String NAMESPACE = "memberMapper.";
 	
 	public int getMemberListCount() {	
 		return (Integer) sqlSession.selectOne("memberMapper.getMemberListCount");
@@ -30,5 +30,15 @@ public class MemberDAO {
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);		
 		return sqlSession.selectList("memberMapper.getMemberList", map);
+	}
+	
+	// 회원가입
+	public int insertMember(MemberVO memberVO) {
+		return sqlSession.insert(NAMESPACE+"insertMember", memberVO);
+	}
+	
+	// 로그인 체크
+	public MemberVO loginCheck(Map<String, String> requestMap) {
+		return (MemberVO) sqlSession.selectOne(NAMESPACE+"loginCheck", requestMap);
 	}
 }

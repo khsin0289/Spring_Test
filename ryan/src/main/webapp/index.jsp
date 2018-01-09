@@ -11,7 +11,8 @@
 	
 	<ul>
 		<li><a href="board/boardList.do">보드 게시판</a></li>
-		<li><a href="member/memberList.do">멤버 게시판</a></li>
+		<li><a href="member/memberEnrollView.do">회원가입</a></li>
+		<li><a href="member/login.do">로그인</a></li>
 		<li><a href="mypage/mypageList.do">마이페이지</a></li>
 		<li><a href="googleMap.jsp">지도 보기</a></li>
 	</ul>

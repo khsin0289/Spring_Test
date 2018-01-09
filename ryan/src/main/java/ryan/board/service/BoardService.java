@@ -15,10 +15,4 @@ public interface BoardService {
 	// boardWrite
 	int boardWrite(BoardVO boardVO);
 	
-	// boardDelete
-	int boardDelete(int board_no);
-	
-	// boardDetailView
-	BoardVO boardDetailView(int no);
-	
 }

@@ -19,4 +19,32 @@
 			FROM ryan
 		]]>			
 	</select>
+	
+	<!-- 회원가입  -->
+	<insert id="insertMember" parameterType="memberVO" useGeneratedKeys="true" keyProperty="seq">
+		INSERT INTO test.member
+					(id, pwd, name, birth, email1, email2, tel, zipcode, address1, address2, image, member_enrollDate)
+		VALUES
+					(#{id, jdbcType=VARCHAR}
+					,#{pwd, jdbcType=INTEGER}
+					,#{name, jdbcType=VARCHAR}
+					,#{birth, jdbcType=INTEGER}
+					,#{email1, jdbcType=VARCHAR}
+					,#{email2, jdbcType=VARCHAR}
+					,#{tel, jdbcType=VARCHAR}
+					,#{zipcode, jdbcType=INTEGER}
+					,#{address1, jdbcType=VARCHAR}
+					,#{address2, jdbcType=VARCHAR}
+					,#{image, jdbcType=VARCHAR}
+					,#{member_enrollDate})
+	</insert>
+	
+	<select id="loginCheck" parameterType="Map" resultType="memberVO">
+	select 
+	*
+	from member	where
+		id=#{id} and pwd=#{pwd}
+	</select>
+	
+	
 </mapper>

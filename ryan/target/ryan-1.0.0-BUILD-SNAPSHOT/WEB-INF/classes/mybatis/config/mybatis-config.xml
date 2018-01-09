@@ -9,7 +9,6 @@
 	
 	<typeAliases>
 		<typeAlias type="ryan.member.vo.MemberVO" alias="memberVO"/>
-		<typeAlias type="ryan.board.vo.BoardVO" alias="boardVO"/>
-		<typeAlias type="ryan.mypage.vo.MypageVO" alias="mypageVO"/>
+		<typeAlias type="ryan.baord.vo.BoardVO" alias="baordVO"/>
 	</typeAliases>	
 </configuration>

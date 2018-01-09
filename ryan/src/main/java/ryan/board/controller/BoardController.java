@@ -5,7 +5,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ryan.board.service.BoardService;
 import ryan.board.vo.BoardVO;
@@ -16,8 +15,7 @@ public class BoardController {
 	@Resource(name="BoardService")
 	private BoardService boardService;
 	
-	// boardList  start ################################################
-	// boardList 게시물 목록화면
+	// boardList
 	@RequestMapping(value="/boardList.do")
 	public ModelAndView boardListView(ModelAndView mav, HttpServletRequest request){
 		
@@ -68,45 +66,24 @@ public class BoardController {
 		return mav;
 	}
 	
-	// boardWrite View 보드게시판 글쓰기 화면
+	// board insert  start ################################################
+	// boardWrite View
 	@RequestMapping(value="/boardWriteView.do")
 	public String boardWriteView(){
 		return "board/boardWriteView";
 	}
 	
-	// boardWrite DB insert 게시물 등록
+	// boardWrite DB insert
 	@RequestMapping(value="/boardWrite.do")
 	public ModelAndView boardWrite(ModelAndView mav, BoardVO boardVO){
+		
 		boardService.boardWrite(boardVO);
 		mav.setViewName("redirect:/board/boardList.do");
 		return mav;
 	}
-	
-	// boardDetail View 게시물 상세페이지
-	@RequestMapping(value="/boardDetailView.do")
-	public ModelAndView boardDetailView(ModelAndView mav, @RequestParam int no){
-		// boardDetatilView 페이지로 연결
-		BoardVO boardVO = boardService.boardDetailView(no);
-		
-		mav.addObject("boardVO", boardVO);
-		mav.setViewName("board/boardDetailView");
-		return mav;
-	}
-	
-	// boardList delete게시물삭제
-	@RequestMapping(value="/boardDelete.do")
-	public ModelAndView boardDelete(ModelAndView mav, HttpServletRequest request){
-		String[] board_no = request.getParameterValues("no");
-		String[] splitStr = board_no[0].split(",");
-		
-		for(int i=0; i<splitStr.length; i++){
-			boardService.boardDelete(Integer.parseInt(splitStr[i]));
-		}
-		
-		mav.setViewName("redirect:/board/boardList.do");
-		return mav;
-	}
-	
 	// board insert end#################################################
+	
+	
+	
 	
 }
