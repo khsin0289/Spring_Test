@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <title>mypageList</title>
 
 <style type="text/css">
@@ -25,6 +25,27 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<img alt="" src="<c:url value='/resources/images/slide1.jpg'></c:url>">
+<%-- 
+<div id="slider" class="flexslider">
+<ul class="slides">
+  <li>
+    <img alt="" src="<c:url value='/resources/images/slide1.jpg'></c:url>">
+  </li>
+  <li>
+    <img alt="" src="<c:url value='/resources/images/slide2.jpg'></c:url>">
+  </li>
+  <li>
+    <img alt="" src="<c:url value='/resources/images/slide3.jpg'></c:url>">
+  </li>
+  <li>
+    <img alt="" src="<c:url value='/resources/images/slide4.jpg'></c:url>">
+  </li>
+
+</ul>
+</div> --%>
+
+
 <a href="/ryan/index.jsp">메인으로</a>
 </body>
 </html>
