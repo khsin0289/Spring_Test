@@ -3,29 +3,28 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class BoardVO implements Serializable{
-	private int no;
+	private int seq;
 	private String subject;
 	private String contents;
 	
-	
-	public BoardVO() {}
-
-	public BoardVO(int no, String subject, String contents) {
+	public BoardVO(){}
+	public BoardVO(int seq, String subject, String contents) {
 		super();
-		this.no = no;
+		this.seq = seq;
 		this.subject = subject;
 		this.contents = contents;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "BoardVO [no=" + no + ", subject=" + subject + ", contents=" + contents + "]";
+		return "BoardVO [seq=" + seq + ", subject=" + subject + ", contents=" + contents + "]";
 	}
-	public int getNo() {
-		return no;
+
+	public int getSeq() {
+		return seq;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setSeq(int seq) {
+		this.seq = seq;
 	}
 	public String getSubject() {
 		return subject;
@@ -39,5 +38,4 @@ public class BoardVO implements Serializable{
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-
 }

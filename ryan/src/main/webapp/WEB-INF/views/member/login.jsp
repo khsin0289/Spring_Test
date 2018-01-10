@@ -74,7 +74,7 @@ $(document).ready(function(){
 	      }
 	      // 로그인
 	      $.ajax({
-	          url: "loginCheck",
+	          url: "loginCheck.do",
 	          method:"POST",
 	          async:true,
 	          data:{

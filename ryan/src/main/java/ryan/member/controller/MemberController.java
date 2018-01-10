@@ -42,14 +42,17 @@ public class MemberController {
 		
 	    String root = request.getSession().getServletContext().getRealPath("/resources/");
 	    String savePath = root + "/images/";
+	    System.out.println("경로-------------------------------------------------------");
+		System.out.println("root : " + root);
+		System.out.println("savePath : " + savePath);
+		System.out.println("경로-------------------------------------------------------");
 		
 		if(!uploadFile.isEmpty()){
 			String ofileName = uploadFile.getOriginalFilename();
 			
 			long currentTime = System.currentTimeMillis();  
 		    SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
-			String rfileName = simDf.format(new Date(currentTime)) +"."
-					+ ofileName.substring(ofileName.lastIndexOf(".")+1);;
+			String rfileName = simDf.format(new Date(currentTime)) +"."+ ofileName.substring(ofileName.lastIndexOf(".")+1);;
 			uploadFile.transferTo(new File(savePath + rfileName));
 						
 			memberVO.setImage(rfileName);
@@ -58,7 +61,7 @@ public class MemberController {
 		memberService.insertMember(memberVO);
 		mav.addObject(memberVO);
 		
-		mav.setViewName("index");
+		mav.setViewName("member/login");
 		return mav;
 	}
 	
@@ -70,7 +73,7 @@ public class MemberController {
 	}
 	
 	// 로그인 
-	@RequestMapping(value="/loginCheck")
+	@RequestMapping(value="/loginCheck.do")
 	@ResponseBody
 	public Map<String, String> loginCheck(HttpSession session, MemberVO memberVO, HttpServletRequest request, @RequestParam String id, @RequestParam String pwd){
 		Map<String, String> requestMap = new HashMap<String, String>();

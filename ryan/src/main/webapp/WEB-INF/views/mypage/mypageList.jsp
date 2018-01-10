@@ -63,6 +63,7 @@
 </head>
 <body>
 <h1>MY PAGE</h1>
+아이디 : ${sessionScope.loginUser.id}
 	<table id="mypageTable">
 		<c:forEach items="${mypageList}" var="mypageList" varStatus="status">
 			<tr>
