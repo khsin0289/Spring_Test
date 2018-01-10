@@ -41,7 +41,7 @@ public class MemberController {
 		MultipartFile uploadFile = multipartRequest.getFile("uploadImg");
 		
 	    String root = request.getSession().getServletContext().getRealPath("/resources/");
-	    String savePath = root + "/profileUploadFiles/";
+	    String savePath = root + "/images/";
 		
 		if(!uploadFile.isEmpty()){
 			String ofileName = uploadFile.getOriginalFilename();
@@ -56,10 +56,9 @@ public class MemberController {
 		}		
 
 		memberService.insertMember(memberVO);
-		System.out.println("멤버VO값 : " + memberVO);
 		mav.addObject(memberVO);
 		
-		mav.setViewName("member/memberEnrollView");
+		mav.setViewName("index");
 		return mav;
 	}
 	
@@ -70,7 +69,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	// 로그인 체크 
+	// 로그인 
 	@RequestMapping(value="/loginCheck")
 	@ResponseBody
 	public Map<String, String> loginCheck(HttpSession session, MemberVO memberVO, HttpServletRequest request, @RequestParam String id, @RequestParam String pwd){
@@ -90,5 +89,21 @@ public class MemberController {
 			result.put("loginMsg", "fail");
 		}
 		return result;
+	}
+	
+	// 아이디 중복체크
+	@RequestMapping(value="/idCheck.do")
+	@ResponseBody
+	public HashMap<String, MemberVO> idCheck(@RequestParam String id){
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("id", id);
+		MemberVO memberVO = memberService.idCheck(hmap);
+	
+		HashMap<String, MemberVO> resultMap = new HashMap<String, MemberVO>();
+		if(memberVO != null){
+			resultMap.put("memberVO", memberVO);
+		}
+		
+		return resultMap;
 	}
 }

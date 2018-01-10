@@ -17,7 +17,7 @@ public class MemberDAO {
 	private static final String NAMESPACE = "memberMapper.";
 	
 	public int getMemberListCount() {	
-		return (Integer) sqlSession.selectOne("memberMapper.getMemberListCount");
+		return (Integer) sqlSession.selectOne(NAMESPACE+"getMemberListCount");
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -29,7 +29,7 @@ public class MemberDAO {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);		
-		return sqlSession.selectList("memberMapper.getMemberList", map);
+		return sqlSession.selectList(NAMESPACE+"getMemberList", map);
 	}
 	
 	// 회원가입
@@ -40,5 +40,10 @@ public class MemberDAO {
 	// 로그인 체크
 	public MemberVO loginCheck(Map<String, String> requestMap) {
 		return (MemberVO) sqlSession.selectOne(NAMESPACE+"loginCheck", requestMap);
+	}
+	
+	// 아이디 중복체크
+	public MemberVO idCheck(HashMap<String, String> hmap) {
+		return (MemberVO) sqlSession.selectOne(NAMESPACE+"idCheck", hmap);
 	}
 }

@@ -1,5 +1,6 @@
 package ryan.member.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,9 @@ public interface MemberService {
 	// 회원가입
 	int insertMember(MemberVO memberVO);
 	
-	// 로그인 체크
+	// 로그인
 	MemberVO loginCheck(Map<String, String> requestMap);
+	
+	// 아이디 중복체크
+	MemberVO idCheck(HashMap<String, String> hmap);
 }
