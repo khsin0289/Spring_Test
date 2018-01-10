@@ -74,29 +74,21 @@ public class MemberController {
 	@RequestMapping(value="/loginCheck")
 	@ResponseBody
 	public Map<String, String> loginCheck(HttpSession session, MemberVO memberVO, HttpServletRequest request, @RequestParam String id, @RequestParam String pwd){
-		
-	      Map<String, String> requestMap = new HashMap<String, String>();
-	      
-	      requestMap.put("id", id);
-	      requestMap.put("pwd", pwd);
-
-	      MemberVO loginUser = memberService.loginCheck(requestMap);
-	      
-	      Map<String, String> result = new HashMap<String, String>();
-	      if(loginUser != null) {
-	         session.setAttribute("loginUser", loginUser);
-	         if(id.equals("admin")){
-	            result.put("loginMsg", "admin");
-	         }else{
-	            result.put("loginMsg", "main");
-	         }
-	      }else{
-	         result.put("loginMsg", "fail");
-	      }
-	      
-	      
-	      return result;
+		Map<String, String> requestMap = new HashMap<String, String>();
+		requestMap.put("id", id);
+		requestMap.put("pwd", pwd);
+		MemberVO loginUser = memberService.loginCheck(requestMap);
+		Map<String, String> result = new HashMap<String, String>();
+		if(loginUser != null) {
+			session.setAttribute("loginUser", loginUser);
+			if(id.equals("admin")){
+				result.put("loginMsg", "admin");
+			}else{
+				result.put("loginMsg", "main");
+			}
+		}else{
+			result.put("loginMsg", "fail");
+		}
+		return result;
 	}
-	
-
 }
