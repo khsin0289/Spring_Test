@@ -23,10 +23,22 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.getBoardList(currentPage, limit);
 	}
 	
-	//boardWrite
+	// boardWrite 게시판 글쓰기
 	@Override
 	public int boardWrite(BoardVO BoardVO) {
 		return boardDao.boardWirte(BoardVO);
+	}
+
+	// 게시판 상세페이지 연결
+	@Override
+	public BoardVO boardDetailView(int seq) {
+		return boardDao.boardDetailView(seq);
+	}
+	
+	// 게시물 삭제
+	@Override
+	public int boardDelete(int seq) {
+		return boardDao.boardDelete(seq);
 	}
 	
 	

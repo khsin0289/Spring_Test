@@ -14,10 +14,10 @@ import ryan.board.vo.BoardVO;
 public class BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	//	private static final String NAMESPACE = "boardMapper."
+	private static final String NAMESPACE = "boardMapper.";
 	
 	public int getBoardListCount() {
-		return (Integer) sqlSession.selectOne("boardMapper.getBoardListCount");
+		return (Integer) sqlSession.selectOne(NAMESPACE+"getBoardListCount");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -29,10 +29,20 @@ public class BoardDAO {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);		
-		return sqlSession.selectList("boardMapper.getBoardList", map);
+		return sqlSession.selectList(NAMESPACE+"getBoardList", map);
+	}
+	
+	// 게시물 작성DB 입력
+	public int boardWirte(BoardVO boardVO) {
+		return sqlSession.insert(NAMESPACE+"boardWrite", boardVO);
 	}
 
-	public int boardWirte(BoardVO boardVO) {
-		return sqlSession.insert("boardMapper.boardWrite", boardVO);
+	// 게시물 상세페이지 연결
+	public BoardVO boardDetailView(int seq) {
+		return (BoardVO) sqlSession.selectOne(NAMESPACE+"boardDetailView", seq);
+	}
+
+	public int boardDelete(int seq) {
+		return sqlSession.delete(NAMESPACE+"boardDelete", seq);
 	}
 }

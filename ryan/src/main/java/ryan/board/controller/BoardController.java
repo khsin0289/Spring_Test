@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ryan.board.service.BoardService;
 import ryan.board.vo.BoardVO;
@@ -15,7 +16,7 @@ public class BoardController {
 	@Resource(name="BoardService")
 	private BoardService boardService;
 	
-	// boardList
+	// boardList 게시판 리스트
 	@RequestMapping(value="/boardList.do")
 	public ModelAndView boardListView(ModelAndView mav, HttpServletRequest request){
 		
@@ -66,24 +67,40 @@ public class BoardController {
 		return mav;
 	}
 	
-	// board insert  start ################################################
-	// boardWrite View
+	// boardWriteView 게시판 글쓰는 페이지 보기
 	@RequestMapping(value="/boardWriteView.do")
 	public String boardWriteView(){
 		return "board/boardWriteView";
 	}
 	
-	// boardWrite DB insert
+	// boardWrite 게시판 글쓰기 DB 입력
 	@RequestMapping(value="/boardWrite.do")
 	public ModelAndView boardWrite(ModelAndView mav, BoardVO boardVO){
-		
 		boardService.boardWrite(boardVO);
 		mav.setViewName("redirect:/board/boardList.do");
 		return mav;
 	}
-	// board insert end#################################################
 	
+	// boardDetailView 게시판 상세화면 페이지 이동
+	@RequestMapping(value="/boardDetailView.do")
+	public ModelAndView boardDetailView(ModelAndView mav, @RequestParam int seq){
+		// 게시판 상세화면 페이지 연결
+		BoardVO boardVO = boardService.boardDetailView(seq);
+		mav.addObject("boardVO", boardVO);
+		mav.setViewName("board/boardDetailView");
+		return mav;
+	}
 	
-	
+	@RequestMapping(value="/boardDelete.do")
+	public ModelAndView boardDelete(ModelAndView mav, HttpServletRequest request){
+		String[] seq = request.getParameterValues("seq");
+		String[] splitStr = seq[0].split(",");
+		for(int i=0; i<splitStr.length; i++){
+			boardService.boardDelete(Integer.parseInt(splitStr[i]));
+			System.out.println("삭제한 게시물 번호 : " + Integer.parseInt(splitStr[i]));
+		}
+		mav.setViewName("redirect:boardList.do");
+		return mav;
+	}
 	
 }
