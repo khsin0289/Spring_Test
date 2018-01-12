@@ -7,13 +7,14 @@
 		<id property="seq" column="seq"/>
 		<result property="subject" column="subject"/>
 		<result property="contents" column="contents"/>
+		<result property="board_enrolldate" column="board_enrolldate"/>
 	</resultMap>
 	
 	<select id="getBoardListCount" resultType="int">
 		select count(*) from board
 	</select>
 	
-	<!-- boardList 게시판 리스트 -->
+	<!-- boardList 게시판 리스트 페이지 -->
 	<select id="getBoardList" parameterType="Map" resultMap="BoardVOResult">
 		<![CDATA[
 			SELECT * 
@@ -24,10 +25,11 @@
 	<!-- boardWrite 게시물 작성 DB입력-->
 	<insert id="boardWrite" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="seq">
 		INSERT INTO board
-				(subject, contents)
+				(subject, contents, board_enrolldate)
 		VALUES
 				(#{subject}
-				,#{contents})
+				,#{contents}
+				,now())
 	</insert>
 	
 	<!-- boardDetailView 게시물 상세페이지 -->
@@ -41,5 +43,14 @@
 		DELETE FROM	board WHERE seq = #{seq}
 	</delete>
 	
+	<!-- boardUpdateView 게시물 수정페이지 연결 및 데이터 불러오기 -->
+	<select id="boardUpdateView" parameterType="Map" resultMap="BoardVOResult">
+		select * from board where seq= #{seq}
+	</select>
+	
+	<!-- boardUpdate 게시물 수정후 DB 입력 -->
+	<update id="boardUpdate" parameterType="BoardVO">
+		update board set subject = #{subject},  contents = #{contents} where seq = #{seq}
+	</update>
 	
 </mapper>

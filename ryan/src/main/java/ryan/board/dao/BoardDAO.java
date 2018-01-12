@@ -41,8 +41,19 @@ public class BoardDAO {
 	public BoardVO boardDetailView(int seq) {
 		return (BoardVO) sqlSession.selectOne(NAMESPACE+"boardDetailView", seq);
 	}
-
+	
+	// 게시물 삭제
 	public int boardDelete(int seq) {
 		return sqlSession.delete(NAMESPACE+"boardDelete", seq);
+	}
+
+	// 게시물 수정페이지 연결
+	public BoardVO boardUpdateView(int seq) {
+		return (BoardVO) sqlSession.selectOne(NAMESPACE+"boardUpdateView", seq);
+	}
+	
+	// 게시물 수정DB 입력
+	public int boardUpdate(BoardVO boardVO) {
+		return sqlSession.update(NAMESPACE+"boardUpdate", boardVO);
 	}
 }

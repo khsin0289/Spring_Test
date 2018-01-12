@@ -101,7 +101,7 @@
 		<div class="form-group row">
 			<div>
 				<button type="submit" id="">가입완료</button>
-				<input type="button" value="메인으로" onclick="location.href='/ryan/index.jsp'">
+				<input type="button" value="메인으로" onclick="location.href='../view/mainView.do'">
 			</div>
 		</div>
 		

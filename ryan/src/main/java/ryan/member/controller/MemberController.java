@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -94,6 +95,18 @@ public class MemberController {
 		return result;
 	}
 	
+	// 로그아웃
+	@RequestMapping(value="/logout.do")
+	public ModelAndView logout(ModelAndView mav,HttpSession session, HttpServletRequest request, HttpServletResponse response ){
+		session = request.getSession(false);
+		if(session != null){
+			session.invalidate();
+		}
+		mav.setViewName("member/login");
+		return mav;
+	}
+	
+	
 	// 아이디 중복체크
 	@RequestMapping(value="/idCheck.do")
 	@ResponseBody
@@ -101,12 +114,10 @@ public class MemberController {
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		hmap.put("id", id);
 		MemberVO memberVO = memberService.idCheck(hmap);
-	
 		HashMap<String, MemberVO> resultMap = new HashMap<String, MemberVO>();
 		if(memberVO != null){
 			resultMap.put("memberVO", memberVO);
 		}
-		
 		return resultMap;
 	}
 }

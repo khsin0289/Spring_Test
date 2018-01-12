@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Board Write</title>
+<title>게시판 글쓰기</title>
 </head>
 <body>
+<!-- header.jsp -->
+<jsp:include page="../template/header.jsp"/>
 
 	<form id="boardForm" action="/ryan/board/boardWrite.do"  method="post">
 		<table>
@@ -21,7 +23,7 @@
 		</table>
 	</form>
 	<input type="button" onclick="save_btn()" value="저장하기">
-	<input type="button" onclick="history.back()"value="뒤로가기">
+	<input type="button" onclick="location.href='boardList.do'"value="뒤로가기">
 	
 	<script type="text/javascript">
 		function save_btn(){
@@ -29,6 +31,7 @@
 		    document.getElementById("boardForm").submit();
 		}
 	</script>
-	
+<!-- Footer -->
+<jsp:include page="../template/footer.jsp"/>	
 </body>
 </html>

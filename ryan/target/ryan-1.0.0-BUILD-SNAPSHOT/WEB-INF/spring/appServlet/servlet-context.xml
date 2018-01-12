@@ -13,9 +13,13 @@
 	<annotation-driven />
 	
 	<context:component-scan base-package="ryan.**.controller" />
+<!-- 	<context:component-scan base-package="ryan.**.service" />
+	<context:component-scan base-package="ryan.**.dao" /> -->
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/images/**" location="/images/" />
+	
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="5242880" />
@@ -25,5 +29,6 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="contentType" value="text/html; charset=UTF-8" />
 	</beans:bean>		
 </beans:beans>

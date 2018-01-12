@@ -109,6 +109,6 @@
     });
   </script>
 
-<a href="/ryan/index.jsp">메인으로</a>
+<a href="../view/mainView.do">메인으로</a>
 </body>
 </html>

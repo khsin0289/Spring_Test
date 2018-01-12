@@ -12,13 +12,19 @@ public interface BoardService {
 	int getBoardListCount();
 	List<BoardVO> getBoardList(int currentPage, int limit);
 	
-	// boardWrite 글쓰기
+	// boardWrite 게시물 작성 DB입력
 	int boardWrite(BoardVO boardVO);
 	
-	// boardDetailView 게시물 상세보기 페이지 연결
+	// boardDetailView 게시물 상세페이지 연결
 	BoardVO boardDetailView(int seq);
 	
 	// boardDelete 게시물 삭제
 	int boardDelete(int seq);
+	
+	// boardUpdateView 게시물 수정페이지
+	BoardVO boardUpdateView(int seq);
+	
+	// boardUpdate 게시물 수정 DB입력
+	int boardUpdate(BoardVO boardVO);
 	
 }

@@ -62,7 +62,7 @@ public class BoardController {
 			mav.addObject("keyword", keyword);
 			mav.addObject("searchType", searchType);
 		}
-		
+
 		mav.setViewName("board/boardList");
 		return mav;
 	}
@@ -91,6 +91,7 @@ public class BoardController {
 		return mav;
 	}
 	
+	// boardDelete 게시물 삭제
 	@RequestMapping(value="/boardDelete.do")
 	public ModelAndView boardDelete(ModelAndView mav, HttpServletRequest request){
 		String[] seq = request.getParameterValues("seq");
@@ -103,4 +104,20 @@ public class BoardController {
 		return mav;
 	}
 	
+	// boardUpdateView 게시물 수정페이지
+	@RequestMapping(value="/boardUpdateView.do")
+	public ModelAndView boardUpdateView(ModelAndView mav, @RequestParam int seq){
+		BoardVO boardVO = boardService.boardUpdateView(seq);
+		mav.addObject("boardVO", boardVO);
+		mav.setViewName("/board/boardUpdateView");
+		return mav;
+	}
+	
+	// boardUpdate 게시물 수정 DB 입력
+	@RequestMapping(value="boardUpdate.do")
+	public ModelAndView boardUpdate(ModelAndView mav, BoardVO boardVO){
+		boardService.boardUpdate(boardVO);
+		mav.setViewName("redirect:boardList.do");
+		return mav;
+	}
 }
