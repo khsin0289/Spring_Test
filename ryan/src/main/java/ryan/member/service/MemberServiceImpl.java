@@ -42,4 +42,10 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO idCheck(HashMap<String, String> hmap) {
 		return memberDao.idCheck(hmap);
 	}
+
+	// 아이디 찾기
+	@Override
+	public MemberVO idSearch(HashMap<String, String> hmap) {
+		return memberDao.idSearch(hmap);
+	}
 }

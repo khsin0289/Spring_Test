@@ -34,7 +34,7 @@
 	
 		<hr>
 		<div class="findUserInfo">
-			<a href="/friends/member/idSearchView.do" id="idSearch">아이디 찾기</a> | <a href="/friends/member/pwdSearchView.do" id="pwdSearch">비밀번호 찾기</a> | <a href="memberEnrollView.do">회원가입</a> | <a href="../view/mainView.do">메인으로</a>
+			<a href="/ryan/member/idSearchView.do" id="idSearch">아이디 찾기</a> | <a href="/friends/member/pwdSearchView.do" id="pwdSearch">비밀번호 찾기</a> | <a href="memberEnrollView.do">회원가입</a> | <a href="../view/mainView.do">메인으로</a>
 		</div>
 		</form >
 	</div>

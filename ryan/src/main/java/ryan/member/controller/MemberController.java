@@ -28,7 +28,7 @@ public class MemberController {
 	@Resource(name="MemberService")
 	private MemberService memberService;
 	
-	// memberEnrolleView 회원가입 페이지
+	// memberEnrolleView 회원가입 페이지 연결
 	@RequestMapping(value="/memberEnrollView.do")
 	public ModelAndView enrollView(ModelAndView mav){
 		mav.setViewName("member/memberEnrollView");
@@ -120,4 +120,30 @@ public class MemberController {
 		}
 		return resultMap;
 	}
+	
+	// 아이디 찾기 페이지 연결
+	@RequestMapping(value="idSearchView.do")
+	public ModelAndView idSearchView(ModelAndView mav){
+		mav.setViewName("member/idSearchView");
+		return mav;
+	}
+	
+	// 아이디 찾기
+	@RequestMapping(value="/idSearch.do")
+	@ResponseBody
+	public HashMap<String, MemberVO> idSearch(@RequestParam String email1, @RequestParam String email2){
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("email1", email1);
+		hmap.put("email2", email2);
+		
+		MemberVO memberVO = memberService.idSearch(hmap);
+		
+		HashMap<String, MemberVO> resultMap = new HashMap<String, MemberVO>();
+		if(memberVO != null){
+			resultMap.put("memberVO", memberVO);
+		}
+		return resultMap;
+	}
+	
+	
 }

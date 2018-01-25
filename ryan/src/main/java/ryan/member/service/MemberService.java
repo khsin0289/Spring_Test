@@ -23,4 +23,7 @@ public interface MemberService {
 	
 	// 아이디 중복체크
 	MemberVO idCheck(HashMap<String, String> hmap);
+	
+	// 아이디 찾기
+	MemberVO idSearch(HashMap<String, String> hmap);
 }
