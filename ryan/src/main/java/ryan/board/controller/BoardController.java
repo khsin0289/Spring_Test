@@ -1,11 +1,19 @@
 package ryan.board.controller;
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ryan.board.service.BoardService;
 import ryan.board.vo.BoardVO;
@@ -120,4 +128,5 @@ public class BoardController {
 		mav.setViewName("redirect:boardList.do");
 		return mav;
 	}
+	
 }

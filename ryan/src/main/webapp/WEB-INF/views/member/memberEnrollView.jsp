@@ -81,6 +81,7 @@
 			<label for="inputEmail">Email</label>
             	<input type="text" class="inputEmail" name="email1">@
             	<input type="text" class="inputEmail" name="email2">
+            	<input type="button" value="이메일 인증">
         </div>
         
         <!-- 프로필사진 -->

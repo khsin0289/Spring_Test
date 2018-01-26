@@ -129,11 +129,24 @@
 			<version>1.4</version>
 		</dependency>
 		<!-- Fileupload -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.1</version>
-		</dependency>
+		</dependency> -->
+		
+		 <!-- commons FileUpload -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
+        </dependency>
+        
 		<!-- cos -->
 		<dependency>
 			<groupId>com.servlets</groupId>
@@ -152,11 +165,7 @@
 			<scope>compile</scope>
 		</dependency>
 		<!-- Email 인증  -->
-		<dependency>
-    		<groupId>javax.mail</groupId>
-    		<artifactId>mail</artifactId>
-    		<version>1.4.7</version>
-		</dependency>
+
 	</dependencies>
 	
 	<build>
