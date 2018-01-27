@@ -9,7 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-로그인한 아이디 : ${sessionScope.loginUser.id}
+<!-- header.jsp -->
+<jsp:include page="../template/header.jsp"/>
+
 	<form id="updateForm" action="/ryan/board/boardUpdate.do?seq=${boardVO.seq}"  method="post">
 		<table>
 			<tr>
@@ -31,5 +33,10 @@
 		    document.getElementById("updateForm").submit();
 		}
 	</script>
+	
+<!-- Footer.jsp -->
+<div>
+<jsp:include page="../template/footer.jsp"/>
+</div>
 </body>
 </html>

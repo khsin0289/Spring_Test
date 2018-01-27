@@ -43,7 +43,7 @@
 	</table>
 	
 	<div>
-		<input type="button" value="메인으로" onclick="location.href='/ryan/index.jsp'">
+		<input type="button" value="메인으로" onclick="location.href='../view/mainView.do'">
 		<button onclick="location.href='/ryan/board/boardWriteView.do'">글쓰기</button>
 		<button type="button" id='delBtn' class="delectAll">일괄삭제</button>
 	</div>
@@ -93,5 +93,8 @@ $(function() {
 });
 
 </script>
+
+<!-- Footer.jsp -->
+<jsp:include page="../template/footer.jsp"/>	
 </body>
 </html>

@@ -34,7 +34,7 @@
 	
 		<hr>
 		<div class="findUserInfo">
-			<a href="/friends/member/idSearchView.do" id="idSearch">아이디 찾기</a> | <a href="/friends/member/pwdSearchView.do" id="pwdSearch">비밀번호 찾기</a> | <a href="memberEnrollView.do">회원가입</a>
+			<a href="/ryan/member/idSearchView.do" id="idSearch">아이디 찾기</a> | <a href="/friends/member/pwdSearchView.do" id="pwdSearch">비밀번호 찾기</a> | <a href="memberEnrollView.do">회원가입</a> | <a href="../view/mainView.do">메인으로</a>
 		</div>
 		</form >
 	</div>
@@ -86,7 +86,7 @@ $(document).ready(function(){
 	          success: function(data) {
 	             if(data.loginMsg=="main"){
 	            	 alert("로그인 성공");
-	            	 location.href="/ryan/index.jsp"
+	            	 location.href="../view/mainView.do"
 	             }else if(data.loginMsg=="admin"){
 	            	 alert("관리자 로그인");
 	                location.href="/friends/member/adminIndexView.do"
@@ -106,5 +106,7 @@ $(document).ready(function(){
 	   $('.loginBtn').trigger('click');
 	}
 </script>
+
+<jsp:include page="../template/footer.jsp"/>
 </body>
 </html>

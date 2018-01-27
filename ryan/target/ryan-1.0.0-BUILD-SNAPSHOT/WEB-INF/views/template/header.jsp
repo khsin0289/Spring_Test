@@ -9,11 +9,12 @@
 </head>
 <body>
 
-<div>
-	<c:if test="${empty loginUser}"><a href="../member/login.do">로그인</a></c:if>
-	<c:if test="${!empty loginUser}">[ ${sessionScope.loginUser.id } ] 님 환영합니다.</c:if>
-	<c:if test="${!empty loginUser}"><a href="../member/logout.do">로그아웃</a></c:if>
-</div>  	
+	<div class="header">
+		<h1>Header area</h1>
+		<c:if test="${empty loginUser}"><a href="../member/login.do">로그인</a></c:if>
+		<c:if test="${!empty loginUser}">[ ${sessionScope.loginUser.id } ] 님 환영합니다.</c:if>
+		<c:if test="${!empty loginUser}"><a href="../member/logout.do">로그아웃</a></c:if>
+	</div>  	
 
 		<%-- <c:if test="${!empty loginUser}">
 		
@@ -25,5 +26,6 @@
 		    </a>
 		</li>
 		</c:if> --%>
+<hr style="border:0;border-top: 1px solid black;">
 </body>
 </html>

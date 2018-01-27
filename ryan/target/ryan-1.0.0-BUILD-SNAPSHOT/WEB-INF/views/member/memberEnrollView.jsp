@@ -81,6 +81,7 @@
 			<label for="inputEmail">Email</label>
             	<input type="text" class="inputEmail" name="email1">@
             	<input type="text" class="inputEmail" name="email2">
+            	<input type="button" value="이메일 인증">
         </div>
         
         <!-- 프로필사진 -->
@@ -101,7 +102,7 @@
 		<div class="form-group row">
 			<div>
 				<button type="submit" id="">가입완료</button>
-				<input type="button" value="메인으로" onclick="location.href='/ryan/index.jsp'">
+				<input type="button" value="메인으로" onclick="location.href='../view/mainView.do'">
 			</div>
 		</div>
 		
