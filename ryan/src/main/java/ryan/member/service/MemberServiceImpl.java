@@ -48,4 +48,6 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO idSearch(HashMap<String, String> hmap) {
 		return memberDao.idSearch(hmap);
 	}
+
+
 }

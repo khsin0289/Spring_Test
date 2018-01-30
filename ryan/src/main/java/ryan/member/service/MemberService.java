@@ -26,4 +26,5 @@ public interface MemberService {
 	
 	// 아이디 찾기
 	MemberVO idSearch(HashMap<String, String> hmap);
+
 }

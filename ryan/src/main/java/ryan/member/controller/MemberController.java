@@ -6,12 +6,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.core.annotation.SynthesizedAnnotation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
 import ryan.member.service.MemberService;
 import ryan.member.vo.MemberVO;
 
@@ -122,7 +133,7 @@ public class MemberController {
 	}
 	
 	// 아이디 찾기 페이지 연결
-	@RequestMapping(value="idSearchView.do")
+	@RequestMapping(value="/idSearchView.do")
 	public ModelAndView idSearchView(ModelAndView mav){
 		mav.setViewName("member/idSearchView");
 		return mav;
@@ -135,7 +146,6 @@ public class MemberController {
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		hmap.put("email1", email1);
 		hmap.put("email2", email2);
-		
 		MemberVO memberVO = memberService.idSearch(hmap);
 		
 		HashMap<String, MemberVO> resultMap = new HashMap<String, MemberVO>();
@@ -145,7 +155,121 @@ public class MemberController {
 		return resultMap;
 	}
 	
+	// 비밀번호 찾기 페이지 연결
+	@RequestMapping(value="/pwdSearchView.do")
+	public ModelAndView pwdSearchView(ModelAndView mav){
+		mav.setViewName("member/pwdSearchView");
+		return mav;
+	}
+
+
+	// emailAuth 이메일 인증
+	@RequestMapping(value="/emailAuth.do")
+	public static void main(@RequestParam String email1, @RequestParam String email2, @RequestParam String pwd) {
+		
+		// 보내는 쪽의 메일 설정부분(naver로 설정함)
+		String host     = "smtp.naver.com";
+		final String user   = "";	//보내는 사람 email주소 또는 아이디
+		final String password  = "";
+		
+		// 받는사람의 메일주소
+		String to     = "cscmania@naver.com";
+		
+		// Get the session object
+		Properties props = new Properties();
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.auth", "true");
+		
+		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(user, password);
+			}
+		});
 	
+	  // Compose the message
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(user));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			
+			// 메일의 제목
+			message.setSubject("[Subject] Java Mail Test");
+			
+			// 메일의 내용
+			message.setText("비밀번호는" + pwd);
+			
+			// send the message
+			Transport.send(message);
+			System.out.println("message sent successfully...");
+			
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}
 	
+	// 비밀번호 찾기 email 보내기 START ====================================
+	/*@RequestMapping(value="/pwdSearch.do")
+	public ModelAndView emailAuth(HttpServletResponse response, HttpServletRequest request) throws Exception{
+		String email = request.getParameter("email");
+		String authNum = "";
+		
+		authNum = RandomNum();
+		System.out.println("authNum" + authNum);
+		
+		sendEmail(email.toString(), authNum);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/member/pwdSearchView");
+		mav.addObject("email", email);
+		mav.addObject("authNum", authNum);
+		
+		return mav;
+	}
+	
+	// 이메일 인증번호 난수 발생
+	private String RandomNum() {
+		StringBuffer buffer = new StringBuffer();
+		for(int i=0; i<6; i++){
+			int n =(int) (Math.random() * 10);
+					buffer.append(n);
+		}
+		return buffer.toString();
+	}
+
+	private void sendEmail(String email, String authNum) {
+		String host = "smtp.gmail.com";	// smtp 서버
+		String subject = "스프링 이메일인증 테스트 인증번호 전달";
+		String fromName = "스프링 관리자";
+		String from = "adorable.hk@gmail.com"; // 보내는 메일
+		String to1 = email;
+		String content = "인증번호 [ " + authNum + "]";
+		
+		try {
+			Properties props = new Properties();
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.transport.protocol", "smtp");
+			props.put("mail.smtp.host", host);
+			
+			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.port", "456");
+			props.put("mail.smtp.user", from);
+			props.put("mail.smtp.auth", "true");
+			
+			Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication  getPasswordAuthentication(){
+					return new PasswordAuthentication("adorable.hk@gmail.com", "zoflrxj1!");
+				}
+			});
+			
+			Message msg = new MimeMessage(mailSession);
+			msg.setFrom(new InternetAddress(from, MimeUtility.encodeText( fromName, "UTF-8", "B"))); // 보내는사람 설정	
+		
+		}catch (MessagingException e){
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}*/
+	// 비밀번호 찾기 email 보내기 END ====================================
 	
 }

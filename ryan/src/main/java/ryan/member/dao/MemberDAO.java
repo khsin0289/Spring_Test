@@ -49,6 +49,7 @@ public class MemberDAO {
 
 	// 아이디 찾기
 	public MemberVO idSearch(HashMap<String, String> hmap) {
-		return (MemberVO) sqlSession.selectOne(NAMESPACE+".idSearch", hmap);
+		return (MemberVO) sqlSession.selectOne(NAMESPACE+"idSearch", hmap);
 	}
+
 }

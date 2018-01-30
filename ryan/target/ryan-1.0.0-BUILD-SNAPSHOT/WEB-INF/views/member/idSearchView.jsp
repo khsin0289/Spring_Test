@@ -1,73 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>아이디 찾기</title>
-
+<script
+  src="http://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  
 <script type="text/javascript">
 	// 아이디 찾기
-	function emailCheck(){
-		$.ajax({
+	function idSearch(){
+		console.log($('#email1').val() + $('#email2').val());
+		 $.ajax({
 			url: "/ryan/member/idSearch.do",
 			method:"POST",
 			async:true,
 			data:{
-				email1: $("input[email1=email1]").val(),
-				email2: $("input[email2=email2]").val()
+				email1: $('#email1').val(),
+				email2: $('#email2').val()
 			},
 			success: function(data) {
+				alert("성공" + data);
+				console.log(data.memberVO);
 				if(data.memberVO == null){
 					alert("email주소 입력이 올바르지 않습니다.");
 				}else{
-					$("input[name=searchResultId]").val(data.memberVO.id);
+					$("#findId").val(data.memberVO.id);
 				}
 			}
-			
 		});
+	} 
+	//엔터키 이벤트
+	function searchEnterKey(){
+		$('#searchBtn').trigger('click');
 	}
-	</script>
+</script>
 </head>
 
 <body>
 	<div id="container">
-		<h1><span>아이디 찾기</span></h1>
-		<form style=" margin-top:49px;" class="form-inline">
-			<table style="width: 100%;">
-				<tr>	
-					<td>
-						<strong>이메일 인증</strong>본인 명의의 이메일로 본인 인증합니다.
-						<div>
-							<label for="inputPassword2" class="sr-only">email</label>
-							<input type="text" name="email1" id="email1" placeholder="이메일입력" >@
-							<input type="text"  name="email2" id="email2" placeholder="naver.com" >
-						</div>
-						<button type="button" name="emailConfirm" onclick="javascript:confirm_MailSend();">인증메일전송</button>
-						<span id = "confirmSpan" style="display: none">
-							<input type="text" name = "confirm" id = "confirm" placeholder="인증번호를 입력" >
-						</span>
-						<span id="confirmCheck"></span>
-						<input type="hidden" name ="hidConfirm" id= "hidConfirm">
-					</td>
-				</tr>
-			<p>본인 인증은 반드시 회원님 명의로 된 이메일로 이용해주세요. 타인의 개인정보를 도용하여 가입할 경우 향후 적발 시 서비스 이용제한 및 법적 제제를 받으실 수 있습니다.</p>
-			</table>
-		</form> 
-		<a href="javascript:emailCheck();">완료</a>
-	</div>
-
-	<div class="tooltip">인증번호가 오지 않나요?
-		<span class="tooltiptext">Friends가 발송한 메일이 스팸 메일로 분류된 것은 아닌지 확인해 주세요. 스팸 메일함에도 메일이 없다면, 다시 한 번 '인증번호 받기'를 눌러주세요.</span>
-	</div>
-	
-	<form id="searchIdForm">
-		<div class="form-group">
-			<div>
-				<label for="exampleInputName2" id="searchId">찾은 아이디</label>
-				<input type="text" name="searchResultId" id="exampleInputName2" readonly placeholder="이메일 인증후 확인이 가능">
+		<div class="section_title"><h1>	<span>아이디 찾기</span></h1></div>
+		<div style="text-align: center; margin-bottom: 100px;">
+			<form style="width: 50%;">
+				<table border="1" cellspacing="0" style="width: 100%;">
+					<tr>
+						<td>
+							<dl style="margin-right: 40px;">
+								<strong>아이디 찾기</strong>
+								<div>
+									<label for="">email : </label>
+									<input type="text" name="email1" id="email1" placeholder="asd" onkeypress="if(event.keyCode==13){searchEnterKey();}">@
+									<label for="exampleInputName2"></label>
+									<input type="text" name="email2" id="email2" placeholder="naver.com"  onkeypress="if(event.keyCode==13){searchEnterKey();}">
+								</div>
+								<button type="button" onclick="idSearch();">찾기</button>
+							</dl>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<form style="margin-top: 50px;" id="searchPwdForm">
+				<div>
+					<label for="" >아이디</label>
+					<input type="text"  name="searchResultId" id="findId" readonly>
+					<button  id="moveLoginBtn"><a href="login.do">로그인 화면으로</a></button>
 				</div>
-			</div>
-	</form>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

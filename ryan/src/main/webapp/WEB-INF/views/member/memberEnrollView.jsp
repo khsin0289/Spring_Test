@@ -77,15 +77,15 @@
         
         
         <!-- 이메일 -->
-        <div>
+		<div>
 			<label for="inputEmail">Email</label>
-            	<input type="text" class="inputEmail" name="email1">@
-            	<input type="text" class="inputEmail" name="email2">
-            	<input type="button" value="이메일 인증">
-        </div>
+				<input type="text" class="inputEmail" name="email1">@
+				<input type="text" class="inputEmail" name="email2">
+				<input type="button" value="이메일 인증" onclick="location.href = 'emailAuth.do' ">
+		</div>
         
         <!-- 프로필사진 -->
-        <div >
+        <div>
         	<label for="inputProfile">프로필사진</label>
           	<div >
           		<input type="file" id="inputProfile" name="uploadImg">
@@ -108,8 +108,6 @@
 		
 	</form>
 <!-- end form -->
-
-
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>

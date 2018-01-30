@@ -4,9 +4,18 @@
 <mapper namespace="memberMapper">
 	<resultMap type="memberVO" id="MemberVOResult">
 		<id property="seq" column="seq"/>
-		<result property="main_image" column="main_image"/>
-		<result property="main_title" column="main_title"/>
-		<result property="main_text" column="main_text"/>
+		<result property="id" column="id"/>
+		<result property="pwd" column="pwd"/>
+		<result property="name" column="name"/>
+		<result property="birth" column="birth"/>
+		<result property="email1" column="email1"/>
+		<result property="email2" column="email2"/>
+		<result property="tel" column="tel"/>
+		<result property="zipcode" column="zipcode"/>
+		<result property="address1" column="address1"/>
+		<result property="address2" column="address2"/>
+		<result property="image" column="image"/>
+		<result property="member_enrollDate" column="member_enrollDate"/>
 	</resultMap>
 	
 	<select id="getMemberListCount" resultType="int">
@@ -38,7 +47,7 @@
 					,#{image, jdbcType=VARCHAR}
 					,now())
 	</insert>
-	
+		
 	<!-- 로그인 -->
 	<select id="loginCheck" parameterType="Map" resultType="memberVO">
 		select *	from member	where id=#{id} and pwd=#{pwd}
@@ -48,10 +57,10 @@
 	<select id="idCheck" parameterType="Map" resultType="memberVO">
 		select *	from member	where id=#{id}
 	</select>
-	
+		
 	<!-- 아이디 찾기 -->
 	<select id="idSearch" parameterType="Map" resultType="memberVO">
-		select id from member where email1=#{email1} and email2={email2}
+		select *	from member	where email1=#{email1} and email2=#{email2}
 	</select>
 	
 </mapper>
