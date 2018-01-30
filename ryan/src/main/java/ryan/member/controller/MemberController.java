@@ -16,12 +16,11 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.core.annotation.SynthesizedAnnotation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -240,7 +239,7 @@ public class MemberController {
 		String host = "smtp.gmail.com";	// smtp 서버
 		String subject = "스프링 이메일인증 테스트 인증번호 전달";
 		String fromName = "스프링 관리자";
-		String from = "adorable.hk@gmail.com"; // 보내는 메일
+		String from = ""; // 보내는 메일
 		String to1 = email;
 		String content = "인증번호 [ " + authNum + "]";
 		
@@ -257,7 +256,7 @@ public class MemberController {
 			
 			Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
 				protected PasswordAuthentication  getPasswordAuthentication(){
-					return new PasswordAuthentication("adorable.hk@gmail.com", "zoflrxj1!");
+					return new PasswordAuthentication("", "");
 				}
 			});
 			
