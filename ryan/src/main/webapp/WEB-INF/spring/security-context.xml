@@ -8,18 +8,18 @@
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
             
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/login.do" access="permitAll" />
+        <intercept-url pattern="/**" access="permitAll" />
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
         <!-- <intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="https" /> --> <!-- https 보안 -->
-		<form-login
+		<!-- <form-login
 			always-use-default-target="true"
 			login-page=""
-			default-target-url="/mainView.do"
+			default-target-url="/member/mainView.do"
 			authentication-failure-url="/login.do" 
 			login-processing-url="/loginCheck.do"
 			username-parameter="id"
-			password-parameter="pwd"/>
+			password-parameter="pwd"/> -->
     
 		<session-management>
 			<concurrency-control max-sessions="1" expired-url="/login_duplicate"/></session-management>
