@@ -13,7 +13,7 @@
 	
 <!-- 로그인 Form -->	
 	<div class="" align="center">
-		<form method="post" name="loginForm" >
+		<form method="post" name="loginForm" action="/loginCheck.do">
 			<div class="box">
 				<table>
 					<tr>
@@ -38,6 +38,9 @@
 		</div>
 		</form >
 	</div>
+	
+	
+	
 	
 	
 	<!-- 페이스북 로그인 -->

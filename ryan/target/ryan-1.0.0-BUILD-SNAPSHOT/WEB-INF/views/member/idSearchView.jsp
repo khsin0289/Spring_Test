@@ -23,7 +23,6 @@
 				email2: $('#email2').val()
 			},
 			success: function(data) {
-				alert("성공" + data);
 				console.log(data.memberVO);
 				if(data.memberVO == null){
 					alert("email주소 입력이 올바르지 않습니다.");
@@ -48,16 +47,13 @@
 				<table border="1" cellspacing="0" style="width: 100%;">
 					<tr>
 						<td>
-							<dl style="margin-right: 40px;">
-								<strong>아이디 찾기</strong>
-								<div>
-									<label for="">email : </label>
-									<input type="text" name="email1" id="email1" placeholder="asd" onkeypress="if(event.keyCode==13){searchEnterKey();}">@
-									<label for="exampleInputName2"></label>
-									<input type="text" name="email2" id="email2" placeholder="naver.com"  onkeypress="if(event.keyCode==13){searchEnterKey();}">
-								</div>
-								<button type="button" onclick="idSearch();">찾기</button>
-							</dl>
+							<div>
+								<label for="">email : </label>
+								<input type="text" name="email1" id="email1" placeholder="asd" onkeypress="if(event.keyCode==13){searchEnterKey();}">@
+								<label for="exampleInputName2"></label>
+								<input type="text" name="email2" id="email2" placeholder="naver.com"  onkeypress="if(event.keyCode==13){searchEnterKey();}">
+							</div>
+							<button type="button" onclick="idSearch();">찾기</button>
 						</td>
 					</tr>
 				</table>

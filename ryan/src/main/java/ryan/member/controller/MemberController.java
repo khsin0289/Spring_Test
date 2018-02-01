@@ -29,8 +29,27 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import ryan.member.service.MemberService;
 import ryan.member.vo.MemberVO;
+
+import java.util.Map;
+
+import org.slf4j.Logger;
+
+import org.slf4j.LoggerFactory;
+
+import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.ModelMap;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("member")
@@ -172,7 +191,7 @@ public class MemberController {
 		final String password  = "";
 		
 		// 받는사람의 메일주소
-		String to     = "cscmania@naver.com";
+		String to     = "";
 		
 		// Get the session object
 		Properties props = new Properties();
@@ -270,5 +289,28 @@ public class MemberController {
 		}
 	}*/
 	// 비밀번호 찾기 email 보내기 END ====================================
+	
+	
+	
+	
+/*	
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "logout", required = false) String logout) {
+
+		ModelAndView mav = new ModelAndView();
+		if (error != null) {
+			mav.addObject("error", "Invalid username and password!");
+		}
+		if (logout != null) {
+			mav.addObject("msg", "You've been logged out successfully.");
+		}
+		mav.setViewName("login");
+		return mav;
+	}	
+*/
+	
+
+	
 	
 }
