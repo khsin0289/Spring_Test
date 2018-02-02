@@ -41,6 +41,60 @@
 			
 			</c:forEach>
 	</table>
+	<!-- 페이징처리 -->
+		<div style="text-align: center;">
+			<span>
+				<c:if test="${currentPage <= 1}"></c:if>
+				<c:if test="${currentPage > 1 }">
+					<a href="/ryan/board/boardList.do?page=1&keyword=${keyword }&searchType=${searchType }" >처음</a>
+					<a href="/ryan/board/boardList.do?page=${currentPage-1}&keyword=${keyword }&searchType=${searchType }">이전</a>
+				</c:if>
+				
+				<c:forEach var="p" step="1" begin="${startPage }" end="${endPage }">
+				
+					<c:if test="${p ==currentPage }">
+						<label class="on">${p }</label>
+					</c:if>
+					<c:if test="${p != currentPage }">
+						<c:url var="boardList" value="boardList.do">
+							<c:param name="page" value="${p }"></c:param>
+							<c:param name="keyword" value="${keyword }"></c:param>
+							<c:param name="searchType" value="${searchType }"></c:param>
+						</c:url>
+						<a href="${boardList }">${p }</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${currentPage >= maxPage}">
+				</c:if>
+				<c:if test="${currentPage < maxPage}">
+					<c:url var="boardList" value="boardList.do">
+						<c:param name="page" value="${p }"></c:param>
+						<c:param name="keyword" value="${keyword }"></c:param>
+						<c:param name="searchType" value="${searchType }"></c:param>
+					</c:url>
+					<a href="/ryan/board/boardList.do?page=${currentPage + 1 }&keyword=${keyword }&searchType=${searchType }">다음</a>
+					<a href="/ryan/board/boardList.do?page=${maxPage }&keyword=${keyword }&searchType=${searchType }">끝</a>
+				</c:if>
+				
+			</span>
+		</div>
+		
+		<!-- 검색기능 -->
+		<form action="/board/boardList.do" method="post">
+				<table >
+					<tr>
+						<td >
+						<select id="searchType" name="searchType" >
+				    	<option value="all" selected>전체</option>
+				    	<option value="csSubject">제목</option> 
+				    	<option value="userName">작성자</option>
+				    	</select> 
+				    	</td>
+				    	 <td ><input type='text' id='keyword' class="form-control" name="keyword"></td>
+	                	<td ><input type="submit" id='btnsearch' value="검색"></td>
+					</tr>				
+				</table>
+			</form>
 	
 	<div>
 		<input type="button" value="메인으로" onclick="location.href='../view/mainView.do'">

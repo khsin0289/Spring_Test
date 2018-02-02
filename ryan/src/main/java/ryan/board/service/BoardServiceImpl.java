@@ -13,11 +13,13 @@ public class BoardServiceImpl implements BoardService{
 	@Resource(name="BoardDAO")
 	private BoardDAO boardDao;
 
+	// 게시물 갯수
 	@Override
 	public int getBoardListCount() {
 		return boardDao.getBoardListCount();
 	}
 
+	// 게시판 페이징
 	@Override
 	public List<BoardVO> getBoardList(int currentPage, int limit) {
 		return boardDao.getBoardList(currentPage, limit);

@@ -14,12 +14,40 @@
 		select count(*) from board
 	</select>
 	
-	<!-- boardList 게시판 리스트 페이지 -->
+	<!-- boardList 게시판 리스트 페이지 mysql rownum 쿼리-->
 	<select id="getBoardList" parameterType="Map" resultMap="BoardVOResult">
 		<![CDATA[
-			SELECT * 
-			FROM board
-		]]>			
+			SELECT *
+			FROM (
+			SELECT @NO := @NO + 1 AS ROWNUM, A.*
+			FROM
+			  (
+			    SELECT *
+			    FROM board
+			  ) A,
+			  ( SELECT @NO := 0 ) B 
+			) C
+			WHERE C.ROWNUM BETWEEN #{startRow} AND #{endRow};
+		]]>
+		<!-- 오라클 rownum 쿼리 
+		select * from
+				(select rownum rnum, csboard_no, cid, csboard_name, csboard_email1, csboard_email2,
+       					csboard_tel, csboard_subject, csboard_content, csboard_ref,
+       					csboard_lev, csboard_step, csboard_pseq, csboard_reply,
+       					csboard_hit, csboard_enrolldate, recnt 
+       					
+    			 from (select rownum rnum, csboard_no, cid, csboard_name, csboard_email1, csboard_email2,
+                  			  csboard_tel, csboard_subject, csboard_content, csboard_ref,
+                 			  csboard_lev, csboard_step, csboard_pseq, csboard_reply,
+                 			  csboard_hit, csboard_enrolldate,
+                  			  (SELECT COUNT(*) FROM csboardreply WHERE csboard_nofk=b.csboard_no) AS recnt
+        					  from csboard b order by csboard_no desc))
+        					  where rnum >= #{startRow} and rnum <= #{endRow} -->
+	</select>
+	<select id="getBoardListAllCount" parameterType="String" resultType="int">
+		select count(*) 
+		from board
+		where (subject like '%'||#{keyword}||'%' or contents like '%'||#{keyword}||'%')
 	</select>
 	
 	<!-- boardWrite 게시물 작성 DB입력-->

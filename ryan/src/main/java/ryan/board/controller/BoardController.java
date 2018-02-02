@@ -27,9 +27,9 @@ public class BoardController {
 	// boardList 게시판 리스트
 	@RequestMapping(value="/boardList.do")
 	public ModelAndView boardListView(ModelAndView mav, HttpServletRequest request){
-		
-		int limit = 10;
 		int currentPage = 1;
+		int limit = 10; //페이징 갯수 설정 1~10
+		
 		String keyword = null;
 		String searchType = null;
 		
@@ -45,6 +45,11 @@ public class BoardController {
 		
 		if(keyword == null || keyword.equals("")){
 			listCount = boardService.getBoardListCount();
+			boardList = boardService.getBoardList(currentPage, limit);
+			
+		}else{
+			listCount = boardService.getBoardListCount();
+			//ArrayList<Notice> list = new NoticeService().selectList();
 			boardList = boardService.getBoardList(currentPage, limit);
 		}
 		

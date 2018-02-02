@@ -20,15 +20,17 @@ public class BoardDAO {
 		return (Integer) sqlSession.selectOne(NAMESPACE+"getBoardListCount");
 	}
 
-	@SuppressWarnings("unchecked")
+
 	public List<BoardVO> getBoardList(int currentPage, int limit) {
 		//읽기 시작할 행 번호
 		int startRow = (currentPage - 1) * limit + 1;
 		//읽을 마지막 행 번호
 		int endRow = startRow + limit - 1;
+		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);		
+		
 		return sqlSession.selectList(NAMESPACE+"getBoardList", map);
 	}
 	
@@ -56,4 +58,9 @@ public class BoardDAO {
 	public int boardUpdate(BoardVO boardVO) {
 		return sqlSession.update(NAMESPACE+"boardUpdate", boardVO);
 	}
+
+	public int getBoardListAllCount(String keyword) {
+		return (Integer) sqlSession.selectOne(NAMESPACE+"getBoardListAllCount", keyword);
+	}
+
 }

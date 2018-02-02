@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+            
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/**" access="permitAll" />
+        <intercept-url pattern="/resources/**" access="permitAll" />
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        <!-- <intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="https" /> --> <!-- https 보안 -->
+		<!-- <form-login
+			always-use-default-target="true"
+			login-page=""
+			default-target-url="/member/mainView.do"
+			authentication-failure-url="/login.do" 
+			login-processing-url="/loginCheck.do"
+			username-parameter="id"
+			password-parameter="pwd"/> -->
+    
+		<session-management>
+			<concurrency-control max-sessions="1" expired-url="/login_duplicate"/></session-management>
+	</http>
+       
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="admin" authorities="ROLE_USER"/>    
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>
