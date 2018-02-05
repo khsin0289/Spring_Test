@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -179,19 +180,31 @@ public class MemberController {
 		mav.setViewName("member/pwdSearchView");
 		return mav;
 	}
+	
+/*	@RequestMapping(value = "/pwdSaerch.do", method = RequestMethod.POST)
+	public void find_pw(@ModelAttribute MemberVO memberVO, HttpServletResponse response) throws Exception{
+		memberService.pwdSearch(response, memberVO);
+	}*/
+	
+	
 
 
-	// emailAuth 이메일 인증
+	// emailAuth naver 이메일 인증
 	@RequestMapping(value="/emailAuth.do")
-	public static void main(@RequestParam String email1, @RequestParam String email2, @RequestParam String pwd) {
+	public static void main(@RequestParam String email1, @RequestParam String email2 ) {
+		//임시 비밀번호로 대체될 난수 생성
+		String authNum = "";
+		authNum = RandomNum(10);
 		
 		// 보내는 쪽의 메일 설정부분(naver로 설정함)
 		String host     = "smtp.naver.com";
 		final String user   = "";	//보내는 사람 email주소 또는 아이디
 		final String password  = "";
 		
+		System.out.println(email1 + email2);
 		// 받는사람의 메일주소
-		String to     = "";
+		String to     = email1 + "@" + email2;
+		System.out.println("받는사람 이메일 : " + to);
 		
 		// Get the session object
 		Properties props = new Properties();
@@ -203,7 +216,7 @@ public class MemberController {
 				return new PasswordAuthentication(user, password);
 			}
 		});
-	
+		
 	  // Compose the message
 		try {
 			MimeMessage message = new MimeMessage(session);
@@ -211,10 +224,10 @@ public class MemberController {
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			
 			// 메일의 제목
-			message.setSubject("[Subject] Java Mail Test");
+			message.setSubject("[임시 비밀번호 발송메일 입니다.] Spring email 전송 Test");
 			
 			// 메일의 내용
-			message.setText("비밀번호는" + pwd);
+			message.setText("임시 비밀번호 : [ " + authNum + " ]");
 			
 			// send the message
 			Transport.send(message);
@@ -224,6 +237,21 @@ public class MemberController {
 			e.printStackTrace();
 		}
 	}
+	
+	// 이메일 인증번호 난수 발생
+	private static String RandomNum(int len) {
+		char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+													'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+		int idx = 0;
+		StringBuffer buffer = new StringBuffer();
+		System.out.println("charSet.length :::: "+charSet.length);
+		for (int i = 0; i < len; i++) {
+			idx = (int) (charSet.length * Math.random()); // 36 * 생성된 난수를 Int로 추출 (소숫점제거)
+			System.out.println("idx :::: "+idx); buffer.append(charSet[idx]); 
+		}
+		return buffer.toString();
+	}
+
 	
 	// 비밀번호 찾기 email 보내기 START ====================================
 	/*@RequestMapping(value="/pwdSearch.do")

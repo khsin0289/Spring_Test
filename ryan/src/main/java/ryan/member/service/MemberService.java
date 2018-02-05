@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,7 @@ public interface MemberService {
 	
 	// 아이디 찾기
 	MemberVO idSearch(HashMap<String, String> hmap);
+	/*int pwdSearch(HttpServletResponse response, MemberVO memberVO);
+	void send_mail(MemberVO memberVO, String div) throws Exception;*/
 
 }

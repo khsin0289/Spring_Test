@@ -63,4 +63,9 @@
 		select *	from member	where email1=#{email1} and email2=#{email2}
 	</select>
 	
+	<!-- 비밀번호 찾기 -->
+	<update id="pwdSearch" parameterType="memberVO">
+		update member set pwd = #{pwd} where id =#{id}
+	</update>
+	
 </mapper>

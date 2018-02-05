@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -50,6 +52,11 @@ public class MemberDAO {
 	// 아이디 찾기
 	public MemberVO idSearch(HashMap<String, String> hmap) {
 		return (MemberVO) sqlSession.selectOne(NAMESPACE+"idSearch", hmap);
+	}
+	
+	// 비밀번호 찾기 (임시비밀번호 발송 후 임시 비밀번호로db 업데이트)
+	public int pwdSearch(HttpServletResponse response, MemberVO memberVO) {
+		return sqlSession.update(NAMESPACE+"pwdSearch", memberVO);
 	}
 
 }

@@ -59,7 +59,7 @@
 <p align="center">로그인 페이지로 가시려면 <a href="javascript:login()">로그인페이지</a>를 클릭하세요.</p> -->
 	<div id="container">
 		<div class="section_title"><h1>	<span>비밀번호 찾기</span></h1></div>
-			<form style="width: 100%;">
+			<form style="width: 100%;" action="emailAuth.do">
 				<table border="1" cellspacing="0" style="width: 100%;">
 					<tr>
 						<td>아이디
@@ -69,7 +69,7 @@
 						<td>이메일
 							<input type="text" name="email1" onkeypress="if(event.keyCode==13){searchEnterKey();}">@
 							<input type="text" name="email2" onkeypress="if(event.keyCode==13){searchEnterKey();}">
-							<input type="button" value="메일 보내기" onclick="location.href = 'emailAuth.do' ">
+							<input type="submit" value="메일 보내기" >
 						</td>
 					</tr>
 				</table>
