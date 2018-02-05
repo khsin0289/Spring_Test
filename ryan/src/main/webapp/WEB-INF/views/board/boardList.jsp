@@ -2,17 +2,14 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	<% String cp = request.getContextPath(); %> <%--ContextPath 선언 --%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Board List</title>
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-
-<style type="text/css">
-	#BoardTable{border: 1px solid black;}
-	table tr td {width:10%;}
-</style>
+<link href="<%=cp%>/resources/bootstrap-4.0.0/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -20,9 +17,9 @@
 <jsp:include page="../template/header.jsp"/>
 
 	<h1>BOARD</h1>
-		<table id="BoardTable">
+		<table class="table table-hover">
 			<tr>
-				<td><input type="checkbox" id="checkAll" name="checkAll" onclick="allChk(this)"></td>
+				<td><input type="checkbox" name="checkAll" onclick="allChk(this)"></td>
 				<td>No</td>
 				<td>제목</td>
 				<td>작성일</td>
@@ -99,7 +96,7 @@
 	<div>
 		<input type="button" value="메인으로" onclick="location.href='../view/mainView.do'">
 		<button onclick="location.href='/ryan/board/boardWriteView.do'">글쓰기</button>
-		<button type="button" id='delBtn' class="delectAll">일괄삭제</button>
+		<button type="button" id='delBtn' >일괄삭제</button>
 	</div>
 	
 
