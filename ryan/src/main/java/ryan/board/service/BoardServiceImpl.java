@@ -13,17 +13,45 @@ public class BoardServiceImpl implements BoardService{
 	@Resource(name="BoardDAO")
 	private BoardDAO boardDao;
 
-	// 게시물 갯수
+	// boardList 게시판 리스트 / 페이징
 	@Override
 	public int getBoardListCount() {
 		return boardDao.getBoardListCount();
 	}
-
-	// 게시판 페이징
 	@Override
 	public List<BoardVO> getBoardList(int currentPage, int limit) {
 		return boardDao.getBoardList(currentPage, limit);
 	}
+	
+	// boardList 전체검색 리스트 / 검색내용 페이징
+	@Override
+	public int getBoardListAllCount(String keyword) {
+		return boardDao.getBoardListAllCount(keyword);
+	}
+	@Override
+	public List<BoardVO> selectBoardAllList(int currentPage, int limit, String keyword) {
+		return boardDao.selectBoardAllList(currentPage, limit, keyword);
+	}
+	
+	// boardList 제목검색 리스트 / 검색내용 페이징
+	@Override
+	public int getBoardSubjectListCount(String keyword) {
+		return boardDao.getBoardSubjectListCount(keyword);
+	}
+	@Override
+	public List<BoardVO> selectBoardSubjectList(int currentPage, int limit, String keyword) {
+		return boardDao.selectBoardSubjectList(currentPage, limit, keyword);
+	}
+	
+	// boardList 내용검색 리스트 / 검색내용 페이징
+	@Override
+	public int getBoardContentsCount(String keyword) {
+		return boardDao.getBoardContentsCount(keyword);
+	}@Override
+	public List<BoardVO> selectBoardContentsList(int currentPage, int limit, String keyword) {
+		return boardDao.selectBoardContentsList(currentPage, limit, keyword);
+	}
+
 	
 	// 게시판 글쓰기 DB입력
 	@Override
@@ -54,6 +82,10 @@ public class BoardServiceImpl implements BoardService{
 	public int boardUpdate(BoardVO boardVO) {
 		return boardDao.boardUpdate(boardVO);
 	}
+	
+	
+
+	
 	
 	
 }

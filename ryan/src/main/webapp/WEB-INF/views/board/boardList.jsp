@@ -88,14 +88,14 @@
 		</div>
 		
 		<!-- 검색기능 -->
-		<form action="/board/boardList.do" method="post">
+		<form action="<%=cp%>/board/boardList.do" method="post">
 			<table >
 				<tr>
 					<td >
 					<select id="searchType" name="searchType" >
 				    	<option value="all" selected>전체</option>
 				    	<option value="subject">제목</option> 
-				    	<option value="userName">작성자</option>
+				    	<option value="contents">내용</option>
 			    	</select> 
 			    	</td>
 			    	<td ><input type='text' id='keyword' class="form-control" name="keyword"></td>

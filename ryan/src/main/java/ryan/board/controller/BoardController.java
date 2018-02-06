@@ -43,9 +43,25 @@ public class BoardController {
 		int listCount = 0;
 		List<BoardVO> boardList = null;
 		
+		// 키워드 값이 없으면 전체 List 출력
 		if(keyword == null || keyword.equals("")){
 			listCount = boardService.getBoardListCount();
 			boardList = boardService.getBoardList(currentPage, limit);
+		
+		// 전체 키워드로 선택
+		}else if(keyword != null && searchType.equals("all")){
+			listCount = boardService.getBoardListAllCount(keyword);
+			boardList = boardService.selectBoardAllList(currentPage, limit, keyword);
+		
+		// 제목 키워드로 선택
+		}else if(keyword != null && searchType.equals("subject")){
+			listCount = boardService.getBoardSubjectListCount(keyword);
+			boardList = boardService.selectBoardSubjectList(currentPage, limit, keyword);
+
+		// 내용 키워드로 선택
+		}else if(keyword != null && searchType.equals("contents")){
+			listCount = boardService.getBoardContentsCount(keyword);
+			boardList = boardService.selectBoardContentsList(currentPage, limit, keyword);
 			
 		}else{
 			listCount = boardService.getBoardListCount();

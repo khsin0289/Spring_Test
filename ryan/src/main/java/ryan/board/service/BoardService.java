@@ -12,6 +12,18 @@ public interface BoardService {
 	int getBoardListCount();
 	List<BoardVO> getBoardList(int currentPage, int limit);
 	
+	// boardList 전체검색 리스트 / 검색내용 페이징
+	int getBoardListAllCount(String keyword);
+	List<BoardVO> selectBoardAllList(int currentPage, int limit, String keyword);
+	
+	// boardList 제목검색 리스트 / 검색내용 페이징
+	int getBoardSubjectListCount(String keyword);
+	List<BoardVO> selectBoardSubjectList(int currentPage, int limit, String keyword);
+	
+	// boardList 내용검색 리스트 / 검색내용 페이징
+	int getBoardContentsCount(String keyword);
+	List<BoardVO> selectBoardContentsList(int currentPage, int limit, String keyword);
+	
 	// boardWrite 게시물 작성 DB입력
 	int boardWrite(BoardVO boardVO);
 	
@@ -26,5 +38,11 @@ public interface BoardService {
 	
 	// boardUpdate 게시물 수정 DB입력
 	int boardUpdate(BoardVO boardVO);
+	
+
+	
+	
+	
+	
 	
 }
