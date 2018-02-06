@@ -66,6 +66,13 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO idSearch(HashMap<String, String> hmap) {
 		return memberDao.idSearch(hmap);
 	}
+	
+	// 비밀번호 찾기(임시 비밀번호로 update)
+	@Override
+	public int pwdSearch(HashMap<String, String> hmap) {
+		int memberVO = memberDao.pwdSearch(hmap);
+		return memberVO;
+	}
 /*
 	@Override
 	public int pwdSearch(HttpServletResponse response, MemberVO memberVO) {
@@ -152,6 +159,7 @@ public class MemberServiceImpl implements MemberService {
 			System.out.println("메일발송 실패 : " + e);
 		}
 	}*/
+
 
 
 

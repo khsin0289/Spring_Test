@@ -187,7 +187,21 @@ public class MemberController {
 	}*/
 	
 	
-
+	/*@RequestMapping(value="/pwdSearch.do")
+	@ResponseBody
+	public Map<String, MemberVO> pwdSearch(@RequestParam String email1, @RequestParam String email2, @RequestParam String id){
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("email1", email1);
+		hmap.put("email2", email2);
+		hmap.put("id", id);
+		int memberVO = memberService.pwdSearch(hmap);
+		
+		HashMap<String, MemberVO> resultMap = new HashMap<String, MemberVO>();
+		if(memberVO != null){
+			resultMap.put("memberVO", memberVO);
+		}
+		return resultMap;
+	}*/
 
 	// emailAuth naver 이메일 인증
 	@RequestMapping(value="/emailAuth.do")

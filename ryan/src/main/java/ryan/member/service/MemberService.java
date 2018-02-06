@@ -27,7 +27,8 @@ public interface MemberService {
 	
 	// 아이디 찾기
 	MemberVO idSearch(HashMap<String, String> hmap);
-	/*int pwdSearch(HttpServletResponse response, MemberVO memberVO);
-	void send_mail(MemberVO memberVO, String div) throws Exception;*/
+	
+	// 비밀번호 찾기(임시 비밀번호로 update)
+	int pwdSearch(HashMap<String, String> hmap);
 
 }
