@@ -16,18 +16,19 @@ public class BoardDAO {
 	private SqlSession sqlSession;
 	private static final String NAMESPACE = "boardMapper.";
 	
-	public int getBoardListCount() {
+	public int getBoardListCount(String sortSubject) {
 		return (Integer) sqlSession.selectOne(NAMESPACE+"getBoardListCount");
 	}
 	
 	// boardList 게시판 리스트 페이징
-	public List<BoardVO> getBoardList(int currentPage, int limit) {
+	public List<BoardVO> getBoardList(int currentPage, int limit, String sortSubject) {
 		int startRow = (currentPage - 1) * limit + 1;		//읽기 시작할 행 번호
 		int endRow = startRow + limit - 1;		//읽을 마지막 행 번호
-		
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("startRow", startRow);
-		map.put("endRow", endRow);		
+		map.put("endRow", endRow);
+		map.put("sortSubject", sortSubject);
+		System.out.println(map);
 		
 		return sqlSession.selectList(NAMESPACE+"getBoardList", map);
 	}

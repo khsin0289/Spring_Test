@@ -32,6 +32,10 @@ public class BoardController {
 		
 		String keyword = null;
 		String searchType = null;
+		String sortSubject = request.getParameter("sortSubject");
+
+		System.out.println("sortSubject : " + sortSubject);
+		
 		
 		if(request.getParameter("page") != null)
 			currentPage = Integer.parseInt(request.getParameter("page"));
@@ -45,8 +49,8 @@ public class BoardController {
 		
 		// 키워드 값이 없으면 전체 List 출력
 		if(keyword == null || keyword.equals("")){
-			listCount = boardService.getBoardListCount();
-			boardList = boardService.getBoardList(currentPage, limit);
+			listCount = boardService.getBoardListCount(sortSubject);
+			boardList = boardService.getBoardList(currentPage, limit, sortSubject);
 		
 		// 전체 키워드로 선택
 		}else if(keyword != null && searchType.equals("all")){
@@ -64,9 +68,9 @@ public class BoardController {
 			boardList = boardService.selectBoardContentsList(currentPage, limit, keyword);
 			
 		}else{
-			listCount = boardService.getBoardListCount();
+			listCount = boardService.getBoardListCount(sortSubject);
 			//ArrayList<Notice> list = new NoticeService().selectList();
-			boardList = boardService.getBoardList(currentPage, limit);
+			boardList = boardService.getBoardList(currentPage, limit, sortSubject);
 		}
 		
 		// 총 페이지 수 계산 : 목록이 최소 1개일 때  1페이지로 처리하기
@@ -91,11 +95,10 @@ public class BoardController {
 			mav.addObject("keyword", keyword);
 			mav.addObject("searchType", searchType);
 		}
-
 		mav.setViewName("board/boardList");
 		return mav;
 	}
-	
+
 	// boardWriteView 게시판 글쓰는 페이지 보기
 	@RequestMapping(value="/boardWriteView.do")
 	public String boardWriteView(){

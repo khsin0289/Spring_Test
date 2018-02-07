@@ -13,32 +13,20 @@
 	<select id="getBoardListCount" resultType="int">
 		select count(*) from board
 	</select>
-	
+	<!-- 			order by seq ${sortSubject} -->
 	<!-- boardList 게시판 리스트 페이지 mysql rownum 쿼리-->
 	<select id="getBoardList" parameterType="Map" resultMap="BoardVOResult">
-		<![CDATA[
-			SELECT *FROM (	SELECT @NO := @NO + 1 AS ROWNUM, A.* 
-			FROM (  SELECT *
-			    FROM board
-			  ) A,
-			  ( SELECT @NO := 0 ) B 
-			) C
-			WHERE C.ROWNUM BETWEEN #{startRow} AND #{endRow};
-		]]>
-		<!-- 오라클 rownum 쿼리 
-		select * from
-				(select rownum rnum, csboard_no, cid, csboard_name, csboard_email1, csboard_email2,
-       					csboard_tel, csboard_subject, csboard_content, csboard_ref,
-       					csboard_lev, csboard_step, csboard_pseq, csboard_reply,
-       					csboard_hit, csboard_enrolldate, recnt 
-       					
-    			 from (select rownum rnum, csboard_no, cid, csboard_name, csboard_email1, csboard_email2,
-                  			  csboard_tel, csboard_subject, csboard_content, csboard_ref,
-                 			  csboard_lev, csboard_step, csboard_pseq, csboard_reply,
-                 			  csboard_hit, csboard_enrolldate,
-                  			  (SELECT COUNT(*) FROM csboardreply WHERE csboard_nofk=b.csboard_no) AS recnt
-        					  from csboard b order by csboard_no desc))
-        					  where rnum >= #{startRow} and rnum <= #{endRow} -->
+	
+		select *
+		from (select @no := @no + 1 as rownum, A.* 
+			from (select * from board
+			<if test="sortSubject == null">order by seq DESC</if>
+			<if test="sortSubject == 'ASC'">order by seq ASC</if>
+			<if test="sortSubject == 'DESC'">order by seq DESC</if>
+			) A, (select @no := 0) B) C 
+		where
+			C.rownum between #{startRow} and #{endRow} 
+	
 	</select>
 	
 	<!-- boardList 전체검색 리스트 / 검색내용 페이징 -->
@@ -48,11 +36,12 @@
 		where
 			subject like CONCAT('%',#{keyword},'%') || contents like CONCAT('%',#{keyword},'%')
 	</select>
+	
 	<select id="selectBoardAllList" parameterType="Map" resultMap="BoardVOResult" >
 	<![CDATA[
 		select *
 		from ( select @no := @no + 1 as rownum, A.* 
-			from (select * from board ) A,(select @no := 0 ) B ) C
+			from (select * from board order by seq DESC) A,(select @no := 0 ) B ) C
 		where 
 			C.rownum>= #{startRow} and
 			C.rownum <= #{endRow} and
@@ -72,7 +61,7 @@
 	<![CDATA[
 		select *
 		from ( select @no := @no + 1 as rownum, A.*
-			from (select* from board ) A,(select @no := 0 ) B ) C
+			from (select* from board order by seq DESC) A,(select @no := 0 ) B ) C
 		where
 			C.rownum >= #{startRow} and
 			C.rownum<= #{endRow}	and 

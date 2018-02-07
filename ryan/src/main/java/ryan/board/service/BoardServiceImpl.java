@@ -15,12 +15,12 @@ public class BoardServiceImpl implements BoardService{
 
 	// boardList 게시판 리스트 / 페이징
 	@Override
-	public int getBoardListCount() {
-		return boardDao.getBoardListCount();
+	public int getBoardListCount(String sortSubject) {
+		return boardDao.getBoardListCount(sortSubject);
 	}
 	@Override
-	public List<BoardVO> getBoardList(int currentPage, int limit) {
-		return boardDao.getBoardList(currentPage, limit);
+	public List<BoardVO> getBoardList(int currentPage, int limit, String sortSubject) {
+		return boardDao.getBoardList(currentPage, limit, sortSubject);
 	}
 	
 	// boardList 전체검색 리스트 / 검색내용 페이징

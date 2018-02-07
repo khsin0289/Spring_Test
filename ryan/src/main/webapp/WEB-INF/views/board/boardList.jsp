@@ -31,13 +31,16 @@
 	
 
 	<h1>BOARD</h1>
+	<div id="board_div">
 		<table class="table table-hover">
+		<thead>
 			<tr>
-				<td><input type="checkbox" name="checkAll" onclick="allChk(this)"></td>
-				<td>No</td>
-				<td>제목</td>
-				<td>작성일</td>
+				<th><input type="checkbox" name="checkAll" onclick="allChk(this)"></th>
+				<th>No</th>
+				<th>제목 <input type='button' id='sortSubject' value="정렬하기"></th>
+				<th>작성일</th>
 			</tr>
+		</thead>
 			<c:forEach items="${boardList}" var="boardList" varStatus="status">
 				<c:url var="boardCall" value="boardDetailView.do">
 					<c:param name="seq" value="${boardList.seq}"/>
@@ -51,7 +54,7 @@
 			</tr>
 			</c:forEach>
 		</table>
-		
+		</div>
 	<!-- 페이징처리 -->
 		<div style="text-align: center;">
 			<span>
@@ -102,7 +105,8 @@
                 	<td ><input type="submit" id='btnsearch' value="검색"></td>
 				</tr>				
 			</table>
-		</form>
+		</form>	
+	
 	<!-- 글쓰기 / 삭제버튼 -->
 		<div>
 			<input type="button" value="메인으로" onclick="location.href='../view/mainView.do'">
@@ -112,6 +116,28 @@
 	
 
 <script type="text/javascript">
+	var sort = "DESC";
+	$("#sortSubject").click(function(){
+// 		var  queryString = $("form[name=example_form]").serialize();
+		sort = sort=="ASC"?"DESC":"ASC";		
+		$.ajax({
+			url: "/ryan/board/boardList.do",
+			method:"POST",
+			async:true,
+			data:{
+				sortSubject: sort,
+			},
+			success: function(data) {
+				alert("성공");
+				console.log(data);
+				location.href="./boardList.do";
+			}
+		});
+	});
+	
+	
+	
+
 	// 체크박스 전체 선택
 	function allChk(obj){
 		var chkObj = document.getElementsByName("inputCheck");
@@ -132,6 +158,7 @@
 	    }
 	}
 
+	
 	// 삭제버튼 클릭
 	$(function() {
 		$("#delBtn").click(function(){

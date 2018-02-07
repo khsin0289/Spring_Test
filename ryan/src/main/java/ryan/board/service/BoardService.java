@@ -9,8 +9,8 @@ import ryan.board.vo.BoardVO;
 @Service
 public interface BoardService {
 	// boardList 게시판 리스트
-	int getBoardListCount();
-	List<BoardVO> getBoardList(int currentPage, int limit);
+	int getBoardListCount(String sortSubject);
+	List<BoardVO> getBoardList(int currentPage, int limit, String sortSubject);
 	
 	// boardList 전체검색 리스트 / 검색내용 페이징
 	int getBoardListAllCount(String keyword);
