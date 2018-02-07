@@ -16,45 +16,58 @@
 <style type="text/css">
 .Nwagon_column .background line.h {stroke: none;}.Nwagon_column .background line.v {stroke: none;} <!-- 차트 가로세로 라인제거 -->
 
+<!-- 제목 마우스 오버 Css -->
+.arrow_box p{display: block; padding: 1%; border: 1px solid #ccc; border-radius: 5px; }
+.arrow_box {display: none; position: absolute; padding: 16px; -webkit-border-radius: 8px; -moz-border-radius: 8px; border-radius: 8px; background: #009edb; color: #fff; }
+.table table-hover tr td:after {position: absolute; bottom: 100%; left: 50%; width: 0; height: 0; margin-left: -10px; border: solid transparent; 
+border-color: rgba(51, 51, 51, 0); border-bottom-color: #333; border-width: 10px; pointer-events: none; content: " ";}
+span:hover + p.arrow_box { display: block;}
+/* .background {display:none;} */
+
+
+#body_div{width:70%; margin: 0 auto;}
+
 </style>
 </head>
+
 <body>
 
 <!-- header.jsp 호출 -->
 <jsp:include page="../template/header.jsp"/>
 
-	<h2>Pie Chart with colorblind safe colors</h2>
-	<a href="http://nuli.navercorp.com/sharing/nwagon#nWagon-chart2">차트 api doc</a>
-	<div id="chart"></div>
-	<h2>Column Chart</h2>
-	<div id="chart8"></div>
-	
-
+<div id="body_div">
 	<h1>BOARD</h1>
-	<div id="board_div">
-		<table class="table table-hover">
-		<thead>
-			<tr>
-				<th><input type="checkbox" name="checkAll" onclick="allChk(this)"></th>
-				<th>No</th>
-				<th>제목 <input type='button' id='sortSubject' value="정렬하기"></th>
-				<th>작성일</th>
-			</tr>
-		</thead>
-			<c:forEach items="${boardList}" var="boardList" varStatus="status">
-				<c:url var="boardCall" value="boardDetailView.do">
-					<c:param name="seq" value="${boardList.seq}"/>
-				</c:url>
-				<fmt:formatDate var="newFormattedDateString" value="${boardList.board_enrolldate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-			<tr>
-				<td><input type="checkbox" id="inputCheck${status.index}" name="inputCheck" value="${boardList.seq}"></td>
-				<td>${boardList.seq}</td>
-				<td><a href="${boardCall}">${boardList.subject}</a></td>
-				<td>${newFormattedDateString}</td>
-			</tr>
-			</c:forEach>
-		</table>
-		</div>
+	<a href="http://nuli.navercorp.com/sharing/nwagon#nWagon-chart2">차트 api doc</a>
+	<div id="listDiv">
+		<div id="chart" style="float:left"></div>
+		<div id="chart8" style="float:right"></div>
+	
+		<form id="example_form">
+			<table class="table table-hover">
+			<thead>
+				<tr>
+					<th><input type="checkbox" name="checkAll" onclick="allChk(this)"></th>
+					<th>No</th>
+					<th>제목<input type='button' id='sortSubject' value="정렬하기"></th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+				<c:forEach items="${boardList}" var="boardList" varStatus="status">
+					<c:url var="boardCall" value="boardDetailView.do">
+						<c:param name="seq" value="${boardList.seq}"/>
+					</c:url>
+					<fmt:formatDate var="newFormattedDateString" value="${boardList.board_enrolldate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				<tr>
+					<td><input type="checkbox" id="inputCheck${status.index}" name="inputCheck" value="${boardList.seq}"></td>
+					<td>${boardList.seq}</td>
+					<td><span><a href="${boardCall}">${boardList.subject}</a></span><p class="arrow_box">제목 마우스 오버시 말풍선</p></td>
+					<td>${newFormattedDateString}</td>
+				</tr>
+				</c:forEach>
+			</table>
+		</form>
+	</div>
+
 	<!-- 페이징처리 -->
 		<div style="text-align: center;">
 			<span>
@@ -113,12 +126,13 @@
 			<button onclick="location.href='/ryan/board/boardWriteView.do'">글쓰기</button>
 			<button type="button" id='delBtn' >일괄삭제</button>
 		</div>
-	
+</div>	
 
+<!-- Footer.jsp -->
+<jsp:include page="../template/footer.jsp"/>	
 <script type="text/javascript">
 	var sort = "DESC";
 	$("#sortSubject").click(function(){
-// 		var  queryString = $("form[name=example_form]").serialize();
 		sort = sort=="ASC"?"DESC":"ASC";		
 		$.ajax({
 			url: "/ryan/board/boardList.do",
@@ -130,13 +144,10 @@
 			success: function(data) {
 				alert("성공");
 				console.log(data);
-				location.href="./boardList.do";
+				//$("#listDiv").html(data);
 			}
 		});
 	});
-	
-	
-	
 
 	// 체크박스 전체 선택
 	function allChk(obj){
@@ -158,7 +169,6 @@
 	    }
 	}
 
-	
 	// 삭제버튼 클릭
 	$(function() {
 		$("#delBtn").click(function(){
@@ -187,7 +197,7 @@
 			title: 'Web accessibility status',
 			values:[18, 12, 3, 10, 7],
 			colorset: ['#56b4e9', '#e69f00', '#cc79a7', '#009e73', '#0072b2'],
-			fields: ['A', 'B',  'C', 'D', 'E'] 
+			fields: ['A', 'B', 'C', 'D', 'E'] 
 		},
 		'donut_width' : 100, 
 		'core_circle_radius':0,
@@ -205,9 +215,9 @@
 	        },
 	        'dataset': {
 	            title: 'Playing time per day',
-	            values: [5,7,1,3,7,3],
+	            values: [1,3,5,9,6,4],
 	            colorset: ['#56b4e9'],
-	            fields:['Error']
+	            fields:[]
 	        },
 	        'chartDiv': 'chart8',
 	        'chartType': 'column',
@@ -218,8 +228,5 @@
 
 		Nwagon.chart(options);
 </script>
-
-<!-- Footer.jsp -->
-<jsp:include page="../template/footer.jsp"/>	
 </body>
 </html>
