@@ -12,6 +12,7 @@
 <link href="<%=cp%>/resources/bootstrap-4.0.0/css/bootstrap.min.css" rel="stylesheet"><!-- 부트스트랩 -->
 <link rel='stylesheet' href='<%=cp%>/resources/css/Nwagon.css' type='text/css'><!-- 차트 css -->
 <script src='<%=cp%>/resources/js/Nwagon.js'></script><!-- 차트 js -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <!-- 구글차트 -->
 
 <style type="text/css">
 .Nwagon_column .background line.h {stroke: none;}.Nwagon_column .background line.v {stroke: none;} <!-- 차트 가로세로 라인제거 -->
@@ -34,7 +35,14 @@ span:hover + p.arrow_box { display: block;}
 
 <!-- header.jsp 호출 -->
 <jsp:include page="../template/header.jsp"/>
-
+<!-- 구글차트  -->
+	<table class="columns" style="margin:0 auto;">
+      <tr>
+        <td><div id="top_x_div" style="border: 1px solid #ccc"></div></td>
+        <td><div id="chart_div" style="border: 1px solid #ccc"></div></td>
+      </tr>
+    </table>
+    
 <div id="body_div">
 	<h1>BOARD</h1>
 	<a href="http://nuli.navercorp.com/sharing/nwagon#nWagon-chart2">차트 api doc</a>
@@ -119,6 +127,8 @@ span:hover + p.arrow_box { display: block;}
 				</tr>				
 			</table>
 		</form>	
+		
+
 	
 	<!-- 글쓰기 / 삭제버튼 -->
 		<div>
@@ -126,7 +136,68 @@ span:hover + p.arrow_box { display: block;}
 			<button onclick="location.href='/ryan/board/boardWriteView.do'">글쓰기</button>
 			<button type="button" id='delBtn' >일괄삭제</button>
 		</div>
-</div>	
+</div>
+
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      // 컬럼차트
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+          ['Move', 'Percentage'],
+          ["King's pawn (e4)", 44],
+          ["Queen's pawn (d4)", 31],
+          ["Knight to King 3 (Nf3)", 12],
+          ["Queen's bishop pawn (c4)", 10],
+          ['Other', 3]
+        ]);
+
+        var options = {
+          width: 800,
+          legend: { position: 'none' },
+          chart: {
+            title: 'Chess opening moves',
+            subtitle: 'popularity by percentage' },
+          axes: {
+            x: {
+              0: { side: 'top', label: 'White to move'} // Top x-axis.
+            }
+          },
+          bar: { groupWidth: "90%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+        // Convert the Classic options to Material options.
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      };
+      
+      
+      //파이차트
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Pizza');
+        data.addColumn('number', 'Populartiy');
+        data.addRows([
+          ['Pepperoni', 20],
+          ['Hawaiian', 10],
+
+        ]);
+
+        var options = {
+          title: 'Popularity of Types of Pizza',
+          sliceVisibilityThreshold: .2
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
 
 <!-- Footer.jsp -->
 <jsp:include page="../template/footer.jsp"/>	
@@ -195,9 +266,9 @@ span:hover + p.arrow_box { display: block;}
 	var options = {
 		'dataset': {
 			title: 'Web accessibility status',
-			values:[18, 12, 3, 10, 7],
+			values:[60, 40],
 			colorset: ['#56b4e9', '#e69f00', '#cc79a7', '#009e73', '#0072b2'],
-			fields: ['A', 'B', 'C', 'D', 'E'] 
+			fields: ['남자', '여자'] 
 		},
 		'donut_width' : 100, 
 		'core_circle_radius':0,
@@ -210,12 +281,12 @@ span:hover + p.arrow_box { display: block;}
 	// Coulmn 차트
 	var options = {
 			'legend': {
-	            names: ['A','B','C','D','E','F'],
+	            names: ['10대', '20대', '30대', '40대', '50대', '60대', '70대', '80대'],
 	            hrefs: []
 	        },
 	        'dataset': {
 	            title: 'Playing time per day',
-	            values: [1,3,5,9,6,4],
+	            values: [1,3,5,9,6,4,3,5],
 	            colorset: ['#56b4e9'],
 	            fields:[]
 	        },
