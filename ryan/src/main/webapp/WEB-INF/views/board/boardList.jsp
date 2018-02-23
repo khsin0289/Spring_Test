@@ -139,6 +139,10 @@ span:hover + p.arrow_box { display: block;}
 </div>
 
 
+
+<!-- Footer.jsp -->
+<jsp:include page="../template/footer.jsp"/>	
+
 <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawStuff);
@@ -198,9 +202,6 @@ span:hover + p.arrow_box { display: block;}
         chart.draw(data, options);
       }
     </script>
-
-<!-- Footer.jsp -->
-<jsp:include page="../template/footer.jsp"/>	
 <script type="text/javascript">
 	var sort = "DESC";
 	$("#sortSubject").click(function(){

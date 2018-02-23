@@ -49,7 +49,7 @@
         <beans:property name="order" value="1" />
     </beans:bean>
      
-    <beans:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> 
+    <!-- <beans:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> 
         <beans:property name="order" value="0"/> 
         <beans:property name="defaultErrorView" value="error"/> 
         <beans:property name="exceptionMappings"> 
@@ -59,7 +59,8 @@
         </beans:property>
     </beans:bean>
      
-    <beans:bean name="excelView" class="kr.co.myapp.util.ExcelView"/>
+    <beans:bean name="excelView" class="ryan.board.vo.ExcelView"/> -->
+
 
 
     	

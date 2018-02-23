@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,7 +14,7 @@
 	
 <!-- 로그인 Form -->	
 	<div class="" align="center">
-		<form method="post" name="loginForm" action="/loginCheck.do">
+		<form method="post" name="loginForm" action="/ryan/member/login.do">
 			<div class="box">
 				<table>
 					<tr>
@@ -28,7 +29,7 @@
 					</tr>
 				</table>
 	
-			<input type="button" value="Login" class="loginBtn" id="loginBtn" onclick="">
+			<input type="submit" value="Login" class="loginBtn" id="loginBtn" onclick="">
 		    <p><span class="idSave"><input type="checkbox" id="idSave"><label for="">아이디 저장</label></span></p>
 			</div>
 	
@@ -58,7 +59,7 @@
 	<!-- 페이스북 로그인 -->
 	
 <script type="text/javascript">
-$(document).ready(function(){
+/* $(document).ready(function(){
 	// 아이디 저장
 	var value = localStorage.getItem("id");  //웹저장소에 키에 해당하는 데이터 가져옴.
 		if(value != null){          // 데이터가 존재하면
@@ -77,7 +78,7 @@ $(document).ready(function(){
 	      }
 	      // 로그인
 	      $.ajax({
-	          url: "loginCheck.do",
+	          url: "/loginCheck.do",
 	          method:"POST",
 	          async:true,
 	          data:{
@@ -107,7 +108,7 @@ $(document).ready(function(){
 	// 엔터키 이벤트
 	function loginEnterKey(){
 	   $('.loginBtn').trigger('click');
-	}
+	} */
 </script>
 
 <jsp:include page="../template/footer.jsp"/>

@@ -1,0 +1,6 @@
+/**
+ *  DATA RESPONSE JAVASCRIPT
+ */
+
+
+

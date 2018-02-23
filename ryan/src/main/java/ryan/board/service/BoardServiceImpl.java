@@ -1,6 +1,7 @@
 package ryan.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -82,6 +83,20 @@ public class BoardServiceImpl implements BoardService{
 	public int boardUpdate(BoardVO boardVO) {
 		return boardDao.boardUpdate(boardVO);
 	}
+	
+	
+	/*@Override
+	public List<Object> getAllObjects(String target, Map<String, Object> searchMap) {
+		//controller에서 넘어온 target에 따라서 dao 실행을 구분
+        if(target.equals("books")){
+            return boardDao.getBooks(searchMap);//검색조건 searchMap를 넘겨줌
+        }
+ 
+        if(target.equals("booksDetail")){
+            return boardDao.getBooksDetail(searchMap);//검색조건 searchMap를 넘겨줌
+        }
+		return null;
+	}*/
 	
 	
 

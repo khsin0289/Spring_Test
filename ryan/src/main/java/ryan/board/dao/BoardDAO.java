@@ -105,8 +105,16 @@ public class BoardDAO {
 		return sqlSession.update(NAMESPACE+"boardUpdate", boardVO);
 	}
 
+	/*public List<Object> getBooks(Map<String, Object> searchMap) {
+		return sqlSession.selectList(NAMESPACE+"getBooks", searchMap);
+	}
+
+	public List<Object> getBooksDetail(Map<String, Object> searchMap) {
+		return sqlSession.selectList(NAMESPACE+"getBooksDetail", searchMap);
+	}
 
 
+*/
 	
 	
 

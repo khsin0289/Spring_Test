@@ -120,4 +120,17 @@
 		update board set subject = #{subject},  contents = #{contents} where seq = #{seq}
 	</update>
 	
+	<!-- <select id="selectBooks" resultType="kr.co.myapp.excel.domain.Books">
+        select
+            *
+        from
+            board
+    </select>
+    <select id="selectBooksDetail" resultType="kr.co.myapp.excel.domain.BooksDetail">
+        select
+			*
+        from
+            board
+    </select> -->
+	
 </mapper>

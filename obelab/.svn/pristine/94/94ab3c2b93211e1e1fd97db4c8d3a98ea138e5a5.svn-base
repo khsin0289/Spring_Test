@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+	<mapper namespace="doctorMapper">
+		<!-- 회원가입 -->
+		<insert id="insertDoctor" parameterType="doctor">
+			insert into o_doctor
+						(doc_email
+						, doc_pw
+						, doc_last_name
+						, doc_first_name
+						, doc_tel
+						, doc_department
+						, doc_task
+						, doc_reg_date) 
+			values
+						(#{doc_email}
+						, #{doc_pw}
+						, #{doc_last_name}
+						, #{doc_first_name}
+						, #{doc_tel}
+						, #{doc_department}
+						, #{doc_task}
+						, now())
+		</insert>
+		
+		
+		<!-- 아이디 중복체크 -->
+		<select id="emailChk" parameterType="HashMap" resultType="doctor">
+			select *	from o_doctor	where doc_email=#{doc_email}
+		</select>
+	</mapper>
+	
+	

@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+/*
+ * Placeholder Color Set
+ */
+ /* Internet Explorer 10 이상에 적용 */
+input:-ms-input-placeholder { color: #c8c8c8; font-family: 'NanumBarunGothicRegular'; }
+/*Webkit, Blink, Edge에 적용*/
+input::-webkit-input-placeholder { color: #c8c8c8; font-family: 'NanumBarunGothicRegular'; }
+/*Mozilla Firefox 4 부터 18에 적용*/
+input::-moz-placeholder { color: #c8c8c8; font-family: 'NanumBarunGothicRegular'; } 
+/*Mozilla Firefox 19 이상에 적용*/
+input::-moz-placeholder { color: #c8c8c8; font-family: 'NanumBarunGothicRegular'; } 
+ 

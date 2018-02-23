@@ -1,6 +1,7 @@
 package ryan.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,9 @@ public interface BoardService {
 	
 	// boardUpdate 게시물 수정 DB입력
 	int boardUpdate(BoardVO boardVO);
+	
+	
+	/*List<Object> getAllObjects(String target, Map<String, Object> searchMap);*/
 	
 
 	
